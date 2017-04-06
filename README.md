@@ -1,1 +1,4 @@
-"# parti4a" 
+# ASW
+
+# Autores
+Javier Castro Fernández (@javiercasfer95 || @javitxu1995)
