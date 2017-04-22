@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login Dashboard4a</title>
+    <link href="../static/css/login.css" rel="stylesheet"></link>   
+</head>
+<body>
+<div class="login container">
+    <form th:action="@{/login}" method="post" class="form-login">
+        <center>
+        <h2 class="form-login-heading">LOGIN</h2>
+        <label for="lbUsername" class="sr-only">Username</label>  
+        <input type="Username" name="username" required = 'true'></input>
+        <br></br>
+        <label for="lbPassword" class="sr-only">Password&nbsp;</label> 
+        <input type="password" name="password" required = 'true'></input>
+        <input type="hidden" name="cat" th:value="all"></input>
+        <br></br>
+        <button name="btLogin" class="btn btn-primary btn-lg" type="submit">Log in</button>
+        </center>
+    </form>
+</div> 
+</body>
+</html>
