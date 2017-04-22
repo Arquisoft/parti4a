@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlainTextWritter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.personalletter</a> &gt; <span class="el_source">PlainTextWritter.java</span></div><h1>PlainTextWritter.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.personalletter;
+
+import es.uniovi.asw.util.exception.CitizenException;
+
+import java.io.*;
+
+<span class="fc" id="L7">class PlainTextWritter implements TextWritter {</span>
+<span class="fc" id="L8">	private String notCompletePath = &quot;src/test/resources/&quot;;</span>
+
+	@Override
+	public void createDocument(String documentName, String content) throws CitizenException {
+<span class="fc" id="L12">		String realPath = notCompletePath + documentName + &quot;.txt&quot;;</span>
+
+<span class="fc" id="L14">		new File(realPath);</span>
+<span class="fc" id="L15">		FileWriter fileWriter = null;</span>
+<span class="fc" id="L16">		BufferedWriter bf = null;</span>
+		try {
+<span class="fc" id="L18">			fileWriter = new FileWriter(realPath);</span>
+<span class="fc" id="L19">			bf = new BufferedWriter(fileWriter);</span>
+<span class="fc" id="L20">			String realContent = &quot;CitizensLoader TXT\n\n&quot; + content;</span>
+<span class="fc" id="L21">			bf.write(realContent);</span>
+
+<span class="nc" id="L23">		}catch (IOException e) {</span>
+<span class="nc" id="L24">				throw new CitizenException(&quot;Error al generar documento txt&quot; +</span>
+<span class="nc" id="L25">						&quot; [&quot;+ realPath+&quot;] | [&quot;+this.getClass().getName()+&quot;]&quot;);</span>
+
+		}finally {
+<span class="pc" id="L28">			close(bf);</span>
+<span class="pc" id="L29">			close(fileWriter);</span>
+<span class="fc" id="L30">		}</span>
+<span class="fc" id="L31">		}</span>
+
+		public static void close(Closeable c) {
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">			if (c == null) return;</span>
+			try {
+<span class="fc" id="L36">				c.close();</span>
+<span class="nc" id="L37">			} catch (IOException e) {</span>
+				//log the exception
+<span class="fc" id="L39">			}</span>
+<span class="fc" id="L40">		}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

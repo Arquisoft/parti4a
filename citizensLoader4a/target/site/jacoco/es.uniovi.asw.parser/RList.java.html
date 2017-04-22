@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.parser</a> &gt; <span class="el_source">RList.java</span></div><h1>RList.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.parser;
+
+import es.uniovi.asw.dbupdate.Insert;
+import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.reportwritter.WriteReport;
+import es.uniovi.asw.util.exception.CitizenException;
+
+import java.io.File;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * Crea los subcomponentes del parser necesarios para procesar el fichero de
+ * entrada.
+ */
+<span class="fc" id="L17">public abstract class RList implements ReadList {</span>
+
+<span class="fc" id="L19">	private static Insert db = new InsertR();</span>
+<span class="fc" id="L20">	protected static final WriteReport reporter = new WreportR();</span>
+
+
+	abstract List&lt;Citizen&gt;readFile(String path) throws CitizenException;
+
+	@Override
+	public List&lt;Citizen&gt; read(String path) throws CitizenException {
+<span class="fc" id="L27">		reporter.report(&quot;Iniciando lectura de fichero: [&quot;+path+&quot;]&quot;);</span>
+
+<span class="fc" id="L29">		checkFile(path);</span>
+
+
+
+<span class="fc" id="L33">		List&lt;Citizen&gt; citizens = readFile(path);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		if(citizens.size()!=0)</span>
+<span class="fc" id="L35">			db.insert(citizens);</span>
+		else{
+<span class="fc" id="L37">			reporter.report(&quot;No se ha encontrado ningun citizen válido en fichero: [&quot;+path+&quot;]&quot;);</span>
+		}
+<span class="fc" id="L39">		return citizens;</span>
+	}
+
+
+	/**
+	 * Crea la cadena aleatoria de caracteres para generar la contraseña
+	 * 
+	 * @param longitud
+	 * @return
+	 */
+	private String getCadenaAlfanumAleatoria(int longitud) {
+<span class="fc" id="L50">		String cadenaAleatoria = &quot;&quot;;</span>
+<span class="fc" id="L51">		long milis = new java.util.GregorianCalendar().getTimeInMillis();</span>
+<span class="fc" id="L52">		Random r = new Random(milis);</span>
+<span class="fc" id="L53">		int i = 0;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		while (i &lt; longitud) {</span>
+<span class="fc" id="L55">			char c = (char) r.nextInt(255);</span>
+<span class="fc bfc" id="L56" title="All 8 branches covered.">			if ((c &gt;= '0' &amp;&amp; c &lt;= '9') || (c &gt;= 'A' &amp;&amp; c &lt;= 'Z')) {</span>
+<span class="fc" id="L57">				cadenaAleatoria += c;</span>
+<span class="fc" id="L58">				i++;</span>
+			}
+<span class="fc" id="L60">		}</span>
+<span class="fc" id="L61">		return cadenaAleatoria;</span>
+	}
+
+
+
+	protected Citizen anadirCitizen(String name, String surname, String email, Date birth, String address,
+			String nationality, String nif) {
+		Citizen ciudadano;
+<span class="fc" id="L69">		ciudadano = new Citizen();</span>
+<span class="fc" id="L70">		ciudadano.setNombre(name);</span>
+<span class="fc" id="L71">		ciudadano.setApellidos(surname);</span>
+<span class="fc" id="L72">		ciudadano.setEmail(email);</span>
+<span class="fc" id="L73">		ciudadano.setFechaNacimiento(birth);</span>
+<span class="fc" id="L74">		ciudadano.setDireccionPostal(address);</span>
+<span class="fc" id="L75">		ciudadano.setNacionalidad(nationality);</span>
+<span class="fc" id="L76">		ciudadano.setNumeroIdentificativo(nif);</span>
+		// Crea un usuario y contraseña aleatorio
+<span class="fc" id="L78">		String con = getCadenaAlfanumAleatoria(4);</span>
+<span class="fc" id="L79">		ciudadano.setContrasena(con);</span>
+<span class="fc" id="L80">		return ciudadano;</span>
+	}
+
+	private void checkFile(String path) throws CitizenException {
+<span class="fc" id="L84">		File f = new File(path);</span>
+<span class="fc bfc" id="L85" title="All 4 branches covered.">		if(!f.exists() || f.isDirectory()) {</span>
+<span class="fc" id="L86">			reporter.report(&quot;No se encuentra el fichero especificado&quot;);</span>
+<span class="fc" id="L87">			throw new CitizenException(&quot;No se encuentra el fichero en la ruta especificada&quot;);</span>
+		}
+
+<span class="fc" id="L90">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

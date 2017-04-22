@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Citizen.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.model</a> &gt; <span class="el_source">Citizen.java</span></div><h1>Citizen.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.model;
+
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+ * Clase del modelo Citizen
+ */
+@Entity
+@Table(name=&quot;USUARIOS&quot;)
+public class Citizen {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id; // JPA
+	private String nombre;
+	private String apellidos;
+	private String email;
+	private Date fecha_nacimiento;
+	private String direccion_postal;
+	private String nacionalidad;
+	private String numero_identificativo; // Clave natural
+	private String contrasena;
+	@Transient
+	private String contrasena_NC;
+
+
+<span class="fc" id="L30">	public Citizen() {	}</span>
+	public Citizen(String nombre, String apellidos, String email, Date fecha_nacimiento, String direccion_postal, String nacionalidad,
+				   String numero_identificativo) {
+<span class="fc" id="L33">		super();</span>
+<span class="fc" id="L34">		this.nombre = nombre;</span>
+<span class="fc" id="L35">		this.apellidos = apellidos;</span>
+<span class="fc" id="L36">		this.email = email;</span>
+<span class="fc" id="L37">		this.fecha_nacimiento = fecha_nacimiento;</span>
+<span class="fc" id="L38">		this.direccion_postal = direccion_postal;</span>
+<span class="fc" id="L39">		this.nacionalidad = nacionalidad;</span>
+<span class="fc" id="L40">		this.numero_identificativo = numero_identificativo;</span>
+<span class="fc" id="L41">	}</span>
+
+	public Citizen(String nombre, String apellidos, String email, Date fecha_nacimiento, String direccion_postal,
+				   String nacionalidad, String numero_identificativo, String contrasena) {
+<span class="nc" id="L45">		this(nombre,apellidos,email,fecha_nacimiento,direccion_postal,nacionalidad,numero_identificativo);</span>
+<span class="nc" id="L46">		this.contrasena= DigestUtils.sha512Hex(contrasena);</span>
+<span class="nc" id="L47">		this.contrasena_NC=contrasena;</span>
+<span class="nc" id="L48">	}</span>
+
+
+	public void setNombre(String name) {
+<span class="fc" id="L52">		this.nombre = name;</span>
+<span class="fc" id="L53">	}</span>
+
+	public void setApellidos(String surname) {
+<span class="fc" id="L56">		this.apellidos = surname;</span>
+<span class="fc" id="L57">	}</span>
+
+	public void setEmail(String email) {
+<span class="fc" id="L60">		this.email = email;</span>
+<span class="fc" id="L61">	}</span>
+
+	public void setFechaNacimiento(Date birthdate) {
+<span class="fc" id="L64">		this.fecha_nacimiento = birthdate;</span>
+<span class="fc" id="L65">	}</span>
+
+	public void setDireccionPostal(String address) {
+<span class="fc" id="L68">		this.direccion_postal = address;</span>
+<span class="fc" id="L69">	}</span>
+
+	public void setNacionalidad(String nationality) {
+<span class="fc" id="L72">		this.nacionalidad = nationality;</span>
+<span class="fc" id="L73">	}</span>
+
+	public void setNumeroIdentificativo(String nif) {
+<span class="fc" id="L76">		this.numero_identificativo = nif;</span>
+<span class="fc" id="L77">	}</span>
+
+
+
+
+	public Long getId() {
+<span class="nc" id="L83">		return id;</span>
+	}
+
+	public String getNombre() {
+<span class="fc" id="L87">		return nombre;</span>
+	}
+
+	public String getApellidos() {
+<span class="fc" id="L91">		return apellidos;</span>
+	}
+
+	public String getEmail() {
+<span class="fc" id="L95">		return email;</span>
+	}
+
+	public Date getFechaNacimiento() {
+<span class="fc" id="L99">		return fecha_nacimiento;</span>
+	}
+
+	public String getDireccionPostal() {
+<span class="fc" id="L103">		return direccion_postal;</span>
+	}
+
+	public String getNacionalidad() {
+<span class="fc" id="L107">		return nacionalidad;</span>
+	}
+
+	public String getNumeroIdentificativo() {
+<span class="fc" id="L111">		return numero_identificativo;</span>
+	}
+
+	public String getContrasena() {
+<span class="nc" id="L115">		return contrasena;</span>
+	}
+
+	public String getContrasenaNC() {
+<span class="fc" id="L119">		return contrasena_NC;</span>
+	}
+
+	public void setContrasena(String password) {
+<span class="fc" id="L123">		this.contrasena= DigestUtils.sha512Hex(password);</span>
+<span class="fc" id="L124">		this.contrasena_NC=password;</span>
+<span class="fc" id="L125">	}</span>
+
+
+	@Override
+	public boolean equals(Object o) {
+<span class="fc bfc" id="L130" title="All 2 branches covered.">		if (this == o)</span>
+<span class="fc" id="L131">			return true;</span>
+<span class="pc bpc" id="L132" title="2 of 4 branches missed.">		if (o == null || getClass() != o.getClass())</span>
+<span class="nc" id="L133">			return false;</span>
+
+<span class="fc" id="L135">		Citizen citizen = (Citizen) o;</span>
+
+<span class="fc" id="L137">		return numero_identificativo.equals(citizen.numero_identificativo);</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L142">		return numero_identificativo.hashCode();</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L147">		return &quot;Citizen{&quot; + &quot;id=&quot; + id + &quot;, name='&quot; + nombre + '\'' + &quot;, surname='&quot; + apellidos + '\'' + &quot;, email='&quot; + email</span>
+				+ '\'' + &quot;, birthdate=&quot; + fecha_nacimiento + &quot;, address='&quot; + direccion_postal + '\'' + &quot;, nationality='&quot; + nacionalidad
+				+ '\'' + &quot;, nif='&quot; + numero_identificativo + '\'' + &quot;, password='&quot; + contrasena + '\'' + '}';
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

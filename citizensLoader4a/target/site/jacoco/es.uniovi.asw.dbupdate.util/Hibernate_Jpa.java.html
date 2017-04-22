@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Hibernate_Jpa.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.dbupdate.util</a> &gt; <span class="el_source">Hibernate_Jpa.java</span></div><h1>Hibernate_Jpa.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.dbupdate.util;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+
+/**
+ * The Class Hibernate_Jpa
+ */
+<span class="nc" id="L20">public class Hibernate_Jpa {</span>
+
+    /** The emf. */
+<span class="fc" id="L23">    private static EntityManagerFactory emf = null;</span>
+
+    /** The em thread. */
+<span class="fc" id="L26">    private static ThreadLocal&lt;EntityManager&gt; emThread =</span>
+            new ThreadLocal&lt;EntityManager&gt;();
+
+    /**
+     * Creates the entity manager.
+     *
+     * @return the entity manager
+     */
+    public static EntityManager createEntityManager() {
+<span class="fc" id="L35">        EntityManager entityManager = getEmf().createEntityManager();</span>
+<span class="fc" id="L36">        emThread.set(entityManager);</span>
+<span class="fc" id="L37">        return entityManager;</span>
+    }
+
+    /**
+     * Gets the manager.
+     *
+     * @return the manager
+     */
+    public static EntityManager getManager() {
+<span class="fc" id="L46">        return emThread.get();</span>
+    }
+
+    /**
+     * Gets the emf.
+     *
+     * @return the emf
+     */
+    private static EntityManagerFactory getEmf() {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (emf == null) {</span>
+<span class="fc" id="L56">            String persistenceUnitName = loadPersistentUnitName();</span>
+<span class="fc" id="L57">            emf = Persistence.createEntityManagerFactory(persistenceUnitName);</span>
+        }
+<span class="fc" id="L59">        return emf;</span>
+    }
+
+    /**
+     * Load persistent unit name.
+     *
+     * @return the string
+     */
+    private static String loadPersistentUnitName() {
+        try {
+<span class="fc" id="L69">            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L70">            DocumentBuilder db = dbf.newDocumentBuilder();</span>
+<span class="fc" id="L71">            Document doc = db.parse(</span>
+<span class="fc" id="L72">                    Hibernate_Jpa.class.getResourceAsStream(&quot;/META-INF/persistence.xml&quot;));</span>
+
+<span class="fc" id="L74">            doc.getDocumentElement().normalize();</span>
+<span class="fc" id="L75">            NodeList nl = doc.getElementsByTagName(&quot;persistence-unit&quot;);</span>
+
+<span class="fc" id="L77">            return ((Element) nl.item(0)).getAttribute(&quot;name&quot;);</span>
+
+<span class="nc" id="L79">        } catch (ParserConfigurationException e1) {</span>
+            //throw new RuntimeException(e1);
+<span class="nc" id="L81">            throw new PersistenceException();</span>
+<span class="nc" id="L82">        } catch (SAXException e1) {</span>
+<span class="nc" id="L83">            throw new PersistenceException();</span>
+<span class="nc" id="L84">        } catch (IOException e1) {</span>
+<span class="nc" id="L85">            throw new PersistenceException();</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

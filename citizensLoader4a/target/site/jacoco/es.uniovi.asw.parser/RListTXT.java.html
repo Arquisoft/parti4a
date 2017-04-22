@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RListTXT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.parser</a> &gt; <span class="el_source">RListTXT.java</span></div><h1>RListTXT.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.parser;
+
+import es.uniovi.asw.model.Citizen;
+import es.uniovi.asw.util.Console;
+import es.uniovi.asw.util.exception.CitizenException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Implementacion de lector TXT
+ */
+<span class="fc" id="L19">public class RListTXT extends RList implements ReadList {</span>
+
+
+
+	@Override
+	public List&lt;Citizen&gt; readFile(String path) throws CitizenException {
+<span class="fc" id="L25">		List&lt;Citizen&gt; ciudadanos = new ArrayList&lt;Citizen&gt;();</span>
+
+		String name;
+		String surname;
+		String email;
+		Date birth;
+		String address;
+		String nationality;
+		String nif;
+<span class="fc" id="L34">		int row = 0;</span>
+<span class="fc" id="L35">		StringBuilder logger = new StringBuilder();</span>
+
+		String cadena;
+
+		try {
+<span class="fc" id="L40">			FileReader f = new FileReader(path);</span>
+<span class="fc" id="L41">			BufferedReader b = new BufferedReader(f);</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">			while ((cadena = b.readLine()) != null) {</span>
+<span class="fc" id="L44">				row++;</span>
+<span class="fc" id="L45">				String[] datos = cadena.split(&quot;;&quot;);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">				if (datos.length != 7){</span>
+<span class="fc" id="L47">					throw new CitizenException(&quot;En la linea: [&quot;+row+&quot;] faltan&quot; +</span>
+<span class="fc" id="L48">							&quot; datos del ciudadano. No se ha añadido a la base de datos| [&quot;+this.getClass().getName()+&quot;]&quot;);</span>
+				}
+			//		reporter.report(&quot;\tEn la linea &quot; + row
+					//+ &quot; faltan datos del ciudadano, no se ha podido añadir a la base de datos&quot;);
+				else {
+<span class="fc" id="L53">					name = datos[0];</span>
+<span class="fc" id="L54">					surname = datos[1];</span>
+<span class="fc" id="L55">					email = datos[2];</span>
+<span class="fc" id="L56">					birth = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;).parse(datos[3]);</span>
+<span class="fc" id="L57">					address = datos[4];</span>
+<span class="fc" id="L58">					nationality = datos[5];</span>
+<span class="fc" id="L59">					nif = datos[6];</span>
+<span class="fc" id="L60">					ciudadanos.add(anadirCitizen(name, surname, email, birth,</span>
+							address, nationality, nif));
+				}
+<span class="fc" id="L63">			}</span>
+<span class="fc" id="L64">			b.close();</span>
+<span class="nc" id="L65">		} catch (ParseException e) {</span>
+			// e.printStackTrace();
+<span class="nc" id="L67">			reporter.report(&quot;La fecha de nacimiento no tiene el formato correcto&quot;);</span>
+<span class="nc" id="L68">			Console.print(&quot;La fecha de nacimiento no tiene el formato correcto&quot;);</span>
+<span class="nc" id="L69">			throw  new CitizenException(&quot;Error en el formato de fecha | [&quot;+this.getClass().getName()+&quot;]&quot;);</span>
+
+<span class="nc" id="L71">		} catch (IOException e) {</span>
+<span class="nc" id="L72">			String[] fileName = path.split(&quot;/&quot;);</span>
+			// e.printStackTrace();
+<span class="nc" id="L74">			reporter.report(&quot;Error al cerrar BufferedReader en &quot; + fileName[fileName.length - 1]);</span>
+<span class="nc" id="L75">			Console.print(&quot;Error al cerrar BufferedReader en &quot; + fileName[fileName.length - 1]);</span>
+<span class="nc" id="L76">			throw  new CitizenException(&quot;Error al cerrar BufferedReader | [&quot;+this.getClass().getName()+&quot;]&quot;);</span>
+<span class="fc" id="L77">		}</span>
+
+		// Crear el fichero log
+<span class="fc" id="L80">		String[] cachos = path.split(&quot;/&quot;);</span>
+<span class="fc" id="L81">		String nombreFich1 = cachos[cachos.length - 1];</span>
+
+<span class="fc" id="L83">		return ciudadanos;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

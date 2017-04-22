@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Comprobador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.util</a> &gt; <span class="el_source">Comprobador.java</span></div><h1>Comprobador.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.util;
+
+
+/**
+ * Clase comprobadora de entradas
+ */
+<span class="nc" id="L7">public class Comprobador {</span>
+	
+	public final static String DATE_FORMAT = &quot;dd/MM/yyyy&quot;;
+
+	public static boolean esTodoTexto(String prueba) {
+<span class="pc bpc" id="L12" title="1 of 4 branches missed.">		if (prueba == null || prueba.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L13">			return false;</span>
+		}
+<span class="fc" id="L15">		char[] caracteres = prueba.toCharArray();</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">		for (char c : caracteres) {</span>
+<span class="fc bfc" id="L17" title="All 4 branches covered.">			if (!Character.isLetter(c) &amp;&amp; !Character.isWhitespace(c))</span>
+<span class="fc" id="L18">				return false;</span>
+		}
+<span class="fc" id="L20">		return true;</span>
+	}
+
+	public static boolean esTodoDigitos(String prueba) {
+<span class="pc bpc" id="L24" title="1 of 4 branches missed.">		if (prueba == null || prueba == &quot;&quot;) {</span>
+<span class="fc" id="L25">			return false;</span>
+		}
+<span class="fc" id="L27">		char[] caracteres = prueba.toCharArray();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">		for (char c : caracteres) {</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">			if (!Character.isDigit(c))</span>
+<span class="fc" id="L30">				return false;</span>
+		}
+<span class="fc" id="L32">		return true;</span>
+	}
+	public static boolean esEmailCorrecto(String prueba){
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">		if (prueba == null || prueba == &quot;&quot;) {</span>
+<span class="fc" id="L36">			return false;</span>
+		}
+<span class="fc" id="L38">		String[] nombreYmail = prueba.split(&quot;@&quot;);</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">		if(nombreYmail.length != 2){ //Correo incorrecto, no cumple xxx@xxx</span>
+<span class="fc" id="L40">			return false;</span>
+		}
+<span class="fc" id="L42">		String parteMail = nombreYmail[1];</span>
+		/*
+		String[] mail = parteMail.split(&quot;.&quot;);
+		if(mail.length != 2){ //Mail incorrecto, no cumple ...@xxx.xxx
+			return false;
+		}
+		*/
+<span class="fc" id="L49">		return parteMail.contains(&quot;.&quot;);</span>
+
+		
+	}
+	
+	public static boolean emailNoVacio(String email){
+<span class="pc bpc" id="L55" title="1 of 4 branches missed.">		if(email == null || email.equals(&quot;&quot;)){</span>
+<span class="fc" id="L56">			return false;</span>
+		}
+<span class="fc" id="L58">		return true;</span>
+	}
+	
+	public static boolean esAddressCorrecto(String prueba){
+<span class="pc bpc" id="L62" title="1 of 4 branches missed.">		if (prueba == null || prueba == &quot;&quot;) {</span>
+<span class="fc" id="L63">			return false;</span>
+		}
+<span class="fc" id="L65">		String[] ad = prueba.split(&quot; &quot;);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		if(ad.length &lt; 2){ //Correo incorrecto, no cumple xxx@xxx</span>
+<span class="fc" id="L67">			return false;</span>
+		}
+<span class="fc" id="L69">		return true;</span>
+		
+	}
+	
+
+	/**
+	 * 
+	 * @param birth
+	 * @return
+	 */
+	public static boolean esFecha(String birth) {
+<span class="fc" id="L80">		String[] a=birth.split(&quot;/&quot;);</span>
+<span class="pc bpc" id="L81" title="4 of 8 branches missed.">		return a.length==3 &amp;&amp; esTodoDigitos(a[0]) &amp;&amp; esTodoDigitos(a[1]) &amp;&amp; esTodoDigitos(a[2]);</span>
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

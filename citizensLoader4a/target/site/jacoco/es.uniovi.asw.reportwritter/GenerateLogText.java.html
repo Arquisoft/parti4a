@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenerateLogText.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citizensLoader4a</a> &gt; <a href="index.source.html" class="el_package">es.uniovi.asw.reportwritter</a> &gt; <span class="el_source">GenerateLogText.java</span></div><h1>GenerateLogText.java</h1><pre class="source lang-java linenums">package es.uniovi.asw.reportwritter;
+
+<span class="nc" id="L3">public class GenerateLogText {</span>
+
+	/**
+	 * Metodo sobre cargado que comprueba los siguientes atributos del Citizen y
+	 * genera un mensaje para un logger.
+	 * 
+	 * Éste método se puede utilizar en un Excel o similar ya que pide la fila
+	 * en la que se está leyendo el ciudadano.
+	 * 
+	 * Los parámetro para su correcto funcionamiento siguen este orden en el
+	 * docuemnto:
+	 * 
+	 * Nombre, apellidos, email, birth, address, nationality, nif
+	 * 
+	 * @param actualLoggingText
+	 *            StringBuilder en el que se carga el mensaje.
+	 * @param name
+	 *            Nombre del ciudadano
+	 * @param surname
+	 *            Apellido del ciudadano
+	 * @param email
+	 *            Email del ciudadano
+	 * @param birth
+	 *            Fecha de nacimiento del ciudadano
+	 * @param address
+	 *            Dirección del ciudadano
+	 * @param nationality
+	 *            Nacionalidad del ciudadano
+	 * @param nif
+	 *            Número de identificacion del ciudadano
+	 * @param actualrow
+	 *            Columna actual del documento.
+	 * @return
+	 */
+	public static boolean completeTextForLog(StringBuilder actualLoggingText, boolean name, boolean surname,
+			boolean email, boolean birth, boolean address, boolean nationality, boolean nif, int actualrow) {
+
+<span class="fc" id="L40">		boolean todoOK = true;</span>
+<span class="fc" id="L41">		actualLoggingText.append(&quot;Ciudadano línea -&gt; &quot; + actualrow + &quot;\n&quot;);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">		if (!name) {</span>
+<span class="fc" id="L43">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.NAME_ERROR  + &quot;\n&quot;);</span>
+<span class="fc" id="L44">			todoOK = false;</span>
+		}
+<span class="fc bfc" id="L46" title="All 2 branches covered.">		if (!surname) {</span>
+<span class="fc" id="L47">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.SURNAME_ERROR + &quot;\n&quot;);</span>
+<span class="fc" id="L48">			todoOK = false;</span>
+		}
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		if (!email) {</span>
+<span class="fc" id="L51">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.EMAIL_ERROR  + &quot;\n&quot;);</span>
+<span class="fc" id="L52">			todoOK = false;</span>
+		}
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		if (!address) {</span>
+<span class="fc" id="L55">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.ADDRESS_ERROR + &quot;\n&quot;);</span>
+<span class="fc" id="L56">			todoOK = false;</span>
+		}
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		if (!birth) {</span>
+<span class="fc" id="L59">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.DATE_ERROR + &quot;\n&quot;);</span>
+<span class="fc" id="L60">			todoOK = false;</span>
+		}
+<span class="fc bfc" id="L62" title="All 2 branches covered.">		if (!nationality) {</span>
+<span class="fc" id="L63">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.NATIONALITY_ERROR + &quot;\n&quot;);</span>
+<span class="fc" id="L64">			todoOK = false;</span>
+		}
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		if (!nif) {</span>
+<span class="nc" id="L67">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.NIF_ERROR + &quot;\n&quot;);</span>
+<span class="nc" id="L68">			todoOK = false;</span>
+		}
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">		if (!todoOK) {</span>
+<span class="fc" id="L71">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.NOT_ADDED_CITIZEN);</span>
+		} else {
+<span class="nc" id="L73">			actualLoggingText.append(&quot;\t&quot; + ErrorTypes.OK);</span>
+		}
+<span class="fc" id="L75">		actualLoggingText.append(&quot;\n&quot;);</span>
+<span class="fc" id="L76">		return todoOK;</span>
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
