@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sugerencia.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">participationSystem0</a> &gt; <a href="index.source.html" class="el_package">hello.domain</a> &gt; <span class="el_source">Sugerencia.java</span></div><h1>Sugerencia.java</h1><pre class="source lang-java linenums">package hello.domain;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = &quot;SUGERENCIA&quot;)
+public class Sugerencia {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private int votos;
+	private String nombre;
+	private String contenido;
+	@OneToMany(mappedBy = &quot;sugerencia&quot;, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set&lt;Comentario&gt; comentarios;
+	@ManyToMany
+	@JoinTable(name = &quot;voto&quot;, joinColumns = {
+			@JoinColumn(name = &quot;SUGERENCIA_ID&quot;, nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = &quot;CITIZEN_ID&quot;, nullable = false, updatable = false) })
+	private Set&lt;Citizen&gt; ciudadanosQueVotan;
+	@ManyToOne
+	@JoinColumn(name = &quot;categoria_id&quot;)
+	private Categoria categoria;
+
+	@ManyToOne
+	@JoinColumn(name = &quot;usuario_id&quot;)
+	private Citizen usuario;
+	private Date fechaCreacion;
+	private boolean consiguioElMinimo;
+
+<span class="fc" id="L34">	public Sugerencia() {</span>
+<span class="fc" id="L35">	}</span>
+
+	public Sugerencia(String nombre, String contenido, Categoria categoria) {
+<span class="nc" id="L38">		super();</span>
+<span class="nc" id="L39">		this.nombre = nombre;</span>
+<span class="nc" id="L40">		this.contenido = contenido;</span>
+<span class="nc" id="L41">		this.categoria = categoria;</span>
+		// Association.PoseerSugerencia.link(categoria, this);
+
+<span class="nc" id="L44">	}</span>
+
+	public Sugerencia(String nombre, String contenido, Categoria categoria, Citizen usuario) {
+<span class="nc" id="L47">		super();</span>
+<span class="nc" id="L48">		this.nombre = nombre;</span>
+<span class="nc" id="L49">		this.contenido = contenido;</span>
+<span class="nc" id="L50">		this.categoria = categoria;</span>
+<span class="nc" id="L51">		this.usuario = usuario;</span>
+<span class="nc" id="L52">		this.votos = 0;</span>
+<span class="nc" id="L53">		this.fechaCreacion = new Date();</span>
+<span class="nc" id="L54">		this.ciudadanosQueVotan = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L55">	}</span>
+
+<span class="nc" id="L57">	public Sugerencia(Set&lt;Citizen&gt; ciudadanosQueVotan, Categoria categoria, Citizen usuario, Date fechaCreacion) {</span>
+<span class="nc" id="L58">		this.ciudadanosQueVotan = ciudadanosQueVotan;</span>
+<span class="nc" id="L59">		this.categoria = categoria;</span>
+<span class="nc" id="L60">		this.usuario = usuario;</span>
+<span class="nc" id="L61">		this.fechaCreacion = fechaCreacion;</span>
+<span class="nc" id="L62">	}</span>
+
+	public Sugerencia(int votos, String nombre, String contenido, Set&lt;Comentario&gt; comentarios,
+<span class="nc" id="L65">			Set&lt;Citizen&gt; ciudadanosQueVotan, Categoria categoria, Citizen usuario, Date fechaCreacion) {</span>
+<span class="nc" id="L66">		this.votos = votos;</span>
+<span class="nc" id="L67">		this.nombre = nombre;</span>
+<span class="nc" id="L68">		this.contenido = contenido;</span>
+<span class="nc" id="L69">		this.comentarios = comentarios;</span>
+<span class="nc" id="L70">		this.ciudadanosQueVotan = ciudadanosQueVotan;</span>
+<span class="nc" id="L71">		this.categoria = categoria;</span>
+<span class="nc" id="L72">		this.usuario = usuario;</span>
+<span class="nc" id="L73">		this.fechaCreacion = fechaCreacion;</span>
+<span class="nc" id="L74">	}</span>
+
+	public Citizen getUsuario() {
+<span class="nc" id="L77">		return usuario;</span>
+	}
+
+	public void setUsuario(Citizen usuario) {
+<span class="nc" id="L81">		this.usuario = usuario;</span>
+<span class="nc" id="L82">	}</span>
+
+	public String getNombre() {
+<span class="nc" id="L85">		return nombre;</span>
+	}
+
+	public Long getId() {
+<span class="nc" id="L89">		return id;</span>
+	}
+
+	public void setNombre(String nombre) {
+<span class="nc" id="L93">		this.nombre = nombre;</span>
+<span class="nc" id="L94">	}</span>
+
+	public String getContenido() {
+<span class="nc" id="L97">		return contenido;</span>
+	}
+
+	public void setContenido(String contenido) {
+<span class="nc" id="L101">		this.contenido = contenido;</span>
+<span class="nc" id="L102">	}</span>
+
+	public int getVotos() {
+<span class="nc" id="L105">		return votos;</span>
+	}
+
+	public Date getFechaCreacion() {
+<span class="nc" id="L109">		return fechaCreacion;</span>
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+<span class="nc" id="L113">		this.fechaCreacion = fechaCreacion;</span>
+<span class="nc" id="L114">	}</span>
+
+	public void addComentario(Comentario c) {
+<span class="nc" id="L117">		this.comentarios.add(c);</span>
+<span class="nc" id="L118">	}</span>
+
+	public Set&lt;Comentario&gt; getComentarios() {
+<span class="nc" id="L121">		return new HashSet&lt;Comentario&gt;(comentarios);</span>
+	}
+
+	public Set&lt;Citizen&gt; getCiudadanosQueVotan() {
+<span class="nc" id="L125">		return new HashSet&lt;Citizen&gt;(ciudadanosQueVotan);</span>
+	}
+
+	public Categoria getCategoria() {
+<span class="nc" id="L129">		return categoria;</span>
+	}
+
+	public void incrementarVotos() {
+<span class="nc" id="L133">		this.votos++;</span>
+<span class="nc" id="L134">	}</span>
+
+	public void decrementarVotos() {
+<span class="nc" id="L137">		this.votos--;</span>
+<span class="nc" id="L138">	}</span>
+
+	public void addCiudadanoHaVotado(Citizen ciudadano) {
+<span class="nc" id="L141">		ciudadanosQueVotan.add(ciudadano);</span>
+<span class="nc" id="L142">		ciudadano.addSugerenciaHaVotado(this);</span>
+<span class="nc" id="L143">	}</span>
+
+	public boolean checkCiudadano(Citizen citizen) {
+<span class="nc" id="L146">		return ciudadanosQueVotan.contains(citizen);</span>
+	}
+
+	public boolean isConsiguioElMinimo() {
+<span class="nc" id="L150">		return consiguioElMinimo;</span>
+	}
+
+	public void setConsiguioElMinimo(boolean consiguioElMinimo) {
+<span class="nc" id="L154">		this.consiguioElMinimo = consiguioElMinimo;</span>
+<span class="nc" id="L155">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L159">		final int prime = 31;</span>
+<span class="nc" id="L160">		int result = 1;</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">		result = prime * result + (consiguioElMinimo ? 1231 : 1237);</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">		result = prime * result + ((contenido == null) ? 0 : contenido.hashCode());</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">		result = prime * result + ((fechaCreacion == null) ? 0 : fechaCreacion.hashCode());</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">		result = prime * result + ((id == null) ? 0 : id.hashCode());</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());</span>
+<span class="nc" id="L168">		result = prime * result + votos;</span>
+<span class="nc" id="L169">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L174" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L175">			return true;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L177">			return false;</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L179">			return false;</span>
+<span class="nc" id="L180">		Sugerencia other = (Sugerencia) obj;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">		if (categoria == null) {</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">			if (other.categoria != null)</span>
+<span class="nc" id="L183">				return false;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">		} else if (!categoria.equals(other.categoria))</span>
+<span class="nc" id="L185">			return false;</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">		if (consiguioElMinimo != other.consiguioElMinimo)</span>
+<span class="nc" id="L187">			return false;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">		if (contenido == null) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">			if (other.contenido != null)</span>
+<span class="nc" id="L190">				return false;</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">		} else if (!contenido.equals(other.contenido))</span>
+<span class="nc" id="L192">			return false;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">		if (fechaCreacion == null) {</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">			if (other.fechaCreacion != null)</span>
+<span class="nc" id="L195">				return false;</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">		} else if (!fechaCreacion.equals(other.fechaCreacion))</span>
+<span class="nc" id="L197">			return false;</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">		if (id == null) {</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">			if (other.id != null)</span>
+<span class="nc" id="L200">				return false;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">		} else if (!id.equals(other.id))</span>
+<span class="nc" id="L202">			return false;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">		if (nombre == null) {</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">			if (other.nombre != null)</span>
+<span class="nc" id="L205">				return false;</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">		} else if (!nombre.equals(other.nombre))</span>
+<span class="nc" id="L207">			return false;</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">		if (usuario == null) {</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">			if (other.usuario != null)</span>
+<span class="nc" id="L210">				return false;</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">		} else if (!usuario.equals(other.usuario))</span>
+<span class="nc" id="L212">			return false;</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">		return (votos == other.votos);</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="nc" id="L218">		return &quot;Sugerencia [id=&quot; + id + &quot;, votos=&quot; + votos + &quot;, nombre=&quot; + nombre + &quot;, contenido=&quot; + contenido</span>
+				+ &quot;, categoria=&quot; + categoria + &quot;, usuario=&quot; + usuario + &quot;, fechaCreacion=&quot; + fechaCreacion
+				+ &quot;, consiguioElMinimo=&quot; + consiguioElMinimo + &quot;]&quot;;
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

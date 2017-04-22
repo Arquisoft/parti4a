@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SuggestionServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">participationSystem0</a> &gt; <a href="index.source.html" class="el_package">hello.services.impl</a> &gt; <span class="el_source">SuggestionServiceImpl.java</span></div><h1>SuggestionServiceImpl.java</h1><pre class="source lang-java linenums">package hello.services.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import hello.domain.Categoria;
+import hello.domain.Citizen;
+import hello.domain.Configuration;
+import hello.domain.Sugerencia;
+import hello.producers.Topics;
+import hello.repository.ConfigurationRepository;
+import hello.repository.SuggestionRepository;
+import hello.services.SuggestionService;
+import hello.util.exception.CitizenException;
+
+/**
+ * Created by pelay on 29/03/2017.
+ */
+@Service
+<span class="fc" id="L23">public class SuggestionServiceImpl implements SuggestionService {</span>
+    private SuggestionRepository suggestionRepository;
+    private ConfigurationRepository configurationRepository;
+    
+    @Autowired
+    public void setSuggestionRepository(SuggestionRepository suggRep) {
+<span class="fc" id="L29">        this.suggestionRepository = suggRep;</span>
+<span class="fc" id="L30">    }</span>
+    
+   
+    @Autowired
+    public void setConfigurationRepository(ConfigurationRepository configurationRepository) {
+<span class="fc" id="L35">		this.configurationRepository = configurationRepository;</span>
+<span class="fc" id="L36">	}</span>
+
+
+	@Override
+    public List&lt;Sugerencia&gt; findAll() {
+<span class="nc" id="L41">        return this.suggestionRepository.findAll();</span>
+
+    }
+
+    @Override
+    public Sugerencia findById(Long id) {
+<span class="nc" id="L47">        return this.suggestionRepository.findOne(id);</span>
+    }
+
+    @Override
+    public List&lt;Sugerencia&gt; findByCat(Categoria cat) {
+<span class="nc" id="L52">        return this.suggestionRepository.findByCategoria(cat);</span>
+    }
+
+    @Override
+    public void votePositiveSugerencia(Sugerencia sug, Citizen ciudadano) throws CitizenException {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (suggestionRepository.findOne(sug.getId()) == null) {</span>
+<span class="nc" id="L58">            throw new CitizenException(&quot;La sugerencia no existe.&quot;);</span>
+        } else {
+<span class="nc" id="L60">        	sug.addCiudadanoHaVotado(ciudadano);</span>
+<span class="nc" id="L61">            sug.incrementarVotos();</span>
+<span class="nc" id="L62">            suggestionRepository.save(sug);</span>
+            //guardar en la tabla votos la sugerencia con el usuario
+<span class="nc" id="L64">            logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + &quot;&quot;);</span>
+<span class="nc" id="L65">            loggerCutre.log(this.getClass(), &quot;El ciudadano con ID: &quot;+ciudadano.getId()+&quot;, Votando postivo a sugerencia ID: &quot;+sug.getId());</span>
+            
+<span class="nc" id="L67">            comprobarConsiguioMinimoVotos(sug);</span>
+        }
+<span class="nc" id="L69">    }</span>
+
+    @Override
+    public void voteNegativeSugerencia(Sugerencia sug, Citizen ciudadano) throws CitizenException {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (suggestionRepository.findOne(sug.getId()) == null) {</span>
+            // Error
+<span class="nc" id="L75">            throw new CitizenException(&quot;La sugerencia no existe.&quot;);</span>
+        } else {
+<span class="nc" id="L77">        	sug.addCiudadanoHaVotado(ciudadano);</span>
+<span class="nc" id="L78">            sug.decrementarVotos();</span>
+<span class="nc" id="L79">            suggestionRepository.save(sug);</span>
+<span class="nc" id="L80">            logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + &quot;&quot;);</span>
+<span class="nc" id="L81">            loggerCutre.log(this.getClass(), &quot;El ciudadano con ID: &quot;+ciudadano.getId()+&quot;, Votando negativo a sugerencia ID: &quot;+sug.getId());</span>
+
+        }
+<span class="nc" id="L84">    }</span>
+    @Override
+	public void createSugerencia(Sugerencia sug) throws CitizenException {
+
+		try {
+<span class="nc" id="L89">			this.suggestionRepository.save(sug);</span>
+			// Mandar a Kafka (ejemplo que no tiene por qué ser asi)
+<span class="nc" id="L91">			logger.send(Topics.CREATE_SUGGESTION,</span>
+<span class="nc" id="L92">					sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());</span>
+<span class="nc" id="L93">			loggerCutre.log(this.getClass(), &quot;Sugerencia = &quot; + sug.getNombre(), &quot;Categoria = &quot; + sug.getCategoria().getNombre());</span>
+<span class="nc" id="L94">		} catch (Exception e) {</span>
+<span class="nc" id="L95">			throw new CitizenException(&quot;Error al guardar la sugerencia.&quot;);</span>
+<span class="nc" id="L96">		}</span>
+
+<span class="nc" id="L98">	}</span>
+
+    @Override
+    public void createSugerencia(Citizen citizen, Categoria categoria, String titulo, String contenido) throws CitizenException {
+        try {
+<span class="nc" id="L103">            Sugerencia sug = new Sugerencia(titulo, contenido, categoria, citizen);</span>
+<span class="nc" id="L104">            suggestionRepository.save(sug);</span>
+            // Mandar a Kafka (ejemplo que no tiene por qué ser asi)
+<span class="nc" id="L106">            logger.send(Topics.CREATE_SUGGESTION,</span>
+<span class="nc" id="L107">                    sug.getNombre() + separator + sug.getContenido() + separator + sug.getCategoria());</span>
+<span class="nc" id="L108">            loggerCutre.log(this.getClass(), &quot;Sugerencia = &quot; + sug.getNombre(), &quot;Categoria = &quot; + sug.getCategoria().getNombre());</span>
+<span class="nc" id="L109">        } catch (Exception e) {</span>
+<span class="nc" id="L110">            throw new CitizenException(&quot;Error al guardar la sugerencia.&quot;);</span>
+<span class="nc" id="L111">        }</span>
+<span class="nc" id="L112">    }</span>
+    
+    private void comprobarConsiguioMinimoVotos(Sugerencia sug){
+<span class="nc" id="L115">    	Configuration config = this.configurationRepository.findAll().get(0);</span>
+<span class="nc" id="L116">    	int minVotos = config.getMinimoVotos();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">    	if(sug.getVotos() &gt;= minVotos){</span>
+<span class="nc" id="L118">    		sug.setConsiguioElMinimo(true);</span>
+    	}
+<span class="nc" id="L120">    	logger.send(Topics.SUGGESTION_GETS_MIN_VOTES, sug.getNombre());</span>
+<span class="nc" id="L121">    }</span>
+
+
+	@Override
+	public List&lt;Sugerencia&gt; findSugerenciaWithMinVotes() {
+<span class="nc" id="L126">		List&lt;Sugerencia&gt; sugs = this.suggestionRepository.findAll();</span>
+<span class="nc" id="L127">		List&lt;Sugerencia&gt; mySugs = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		for(Sugerencia sug : sugs){</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">			if(sug.isConsiguioElMinimo()){</span>
+<span class="nc" id="L130">				mySugs.add(sug);</span>
+			}
+<span class="nc" id="L132">		}</span>
+<span class="nc" id="L133">		return sugs;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

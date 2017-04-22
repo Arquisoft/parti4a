@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoggerCutre.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">participationSystem0</a> &gt; <a href="index.source.html" class="el_package">hello.util.loggercutre</a> &gt; <span class="el_source">LoggerCutre.java</span></div><h1>LoggerCutre.java</h1><pre class="source lang-java linenums">package hello.util.loggercutre;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import scala.sys.process.ProcessBuilderImpl.FileOutput;
+
+/**
+ * Logger de consola muy cutre
+ * 
+ * @author uo240327
+ *
+ */
+public class LoggerCutre {
+
+	private File file;
+	public final static String PATH_OF_LOGS = &quot;src/test/resources/logs/&quot;;
+
+<span class="nc" id="L24">	public LoggerCutre() {</span>
+<span class="nc" id="L25">		createLogFile();</span>
+<span class="nc" id="L26">	}</span>
+
+	/**
+	 * Loggea clase, metodo y la lista de parametros que quieras.
+	 * 
+	 * @param className
+	 *            Clase en la que se esta ejecutando el log
+	 * @param metodo
+	 *            metodo en el que esta el log
+	 * @param data
+	 *            datos separados por comas que se van a ir imprimiendo como
+	 *            mensajes
+	 */
+	public void log(Class className, Method metodo, String... data) {
+<span class="nc" id="L40">		StringBuilder mensaje = new StringBuilder();</span>
+<span class="nc" id="L41">		mensaje.append(&quot;-------------------INICIO LOGGERCUTRE------------------------------\n\n&quot;);</span>
+<span class="nc" id="L42">		mensaje.append(&quot;Estoy en la clase &quot; + className.getName() + &quot; - metodo - &quot; + metodo.getName() + &quot;\n&quot;);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		for (String s : data) {</span>
+<span class="nc" id="L44">			mensaje.append(&quot;\t-MENSAJE: &quot; + s + &quot;\n&quot;);</span>
+		}
+<span class="nc" id="L46">		mensaje.append(&quot;-------------------FIN LOGGERCUTRE------------------------------\n\n&quot;);</span>
+<span class="nc" id="L47">		System.out.println(mensaje.toString());</span>
+<span class="nc" id="L48">		writeOnFile(mensaje.toString());</span>
+<span class="nc" id="L49">	}</span>
+
+	/**
+	 * Loggea clase y la lista de parametros que quieras.
+	 * 
+	 * @param className
+	 *            Clase en la que se esta ejecutando el log
+	 * @param data
+	 *            datos separados por comas que se van a ir imprimiendo como
+	 *            mensajes
+	 */
+	public void log(Class className, String... data) {
+<span class="nc" id="L61">		StringBuilder mensaje = new StringBuilder();</span>
+<span class="nc" id="L62">		mensaje.append(&quot;\n\n-------------------INICIO LOGGERCUTRE------------------------------\n\n&quot;);</span>
+<span class="nc" id="L63">		mensaje.append(&quot;Estoy en la clase &quot; + className.getName() + &quot;\n&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		for (String s : data) {</span>
+<span class="nc" id="L65">			mensaje.append(&quot;\t-MENSAJE: &quot; + s + &quot;\n&quot;);</span>
+		}
+<span class="nc" id="L67">		mensaje.append(&quot;\n\n-------------------FIN LOGGERCUTRE------------------------------\n\n&quot;);</span>
+<span class="nc" id="L68">		System.out.println(mensaje.toString());</span>
+<span class="nc" id="L69">	}</span>
+
+	private void createLogFile() {
+		try {
+			// create a temporary file
+<span class="nc" id="L74">			String timeLog = new SimpleDateFormat(&quot;yyyyMMdd_HHmmss&quot;).format(Calendar.getInstance().getTime());</span>
+<span class="nc" id="L75">			this.file = new File(PATH_OF_LOGS + &quot;log_&quot; + timeLog+&quot;.txt&quot;);</span>
+
+//			// This will output the full path where the file will be written
+//			// to...
+//			System.out.println(file.getCanonicalPath());
+//
+//			writer = new BufferedWriter(new FileWriter(file));
+//			writer.write(&quot;Hello world!&quot;);
+<span class="nc" id="L83">		} catch (Exception e) {</span>
+<span class="nc" id="L84">			e.printStackTrace();</span>
+		}finally{
+<span class="nc" id="L86">			System.out.println(&quot;\n\n\n---------------FICH LOG CREADO EN &quot;+ this.file.getPath() +&quot;----------------\n\n\n&quot;);</span>
+
+<span class="nc" id="L88">		}</span>
+<span class="nc" id="L89">	}</span>
+
+	private void writeOnFile(String sentence) {
+		//BufferedWriter writer = null;
+<span class="nc" id="L93">		FileOutputStream output = null;</span>
+		try {
+<span class="nc" id="L95">			output = new FileOutputStream(file);</span>
+<span class="nc" id="L96">			output.write(sentence.getBytes());</span>
+//			writer = new BufferedWriter(new FileWriter(file));
+//			writer.write(sentence);
+<span class="nc" id="L99">		} catch (IOException e) {</span>
+<span class="nc" id="L100">			System.out.println(&quot;\n\n\n---------------CASCO AL ESCRIBIR EN EL LOG----------------\n\n\n&quot;);</span>
+		}finally{
+<span class="nc" id="L102">			try {</span>
+				//writer.close();
+<span class="nc" id="L104">				output.close();</span>
+<span class="nc" id="L105">			} catch (IOException e) {</span>
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+<span class="nc" id="L108">				System.out.println(&quot;\n\n\n---------------CASCO EL CERRAR EL LOG----------------\n\n\n&quot;);</span>
+
+<span class="nc" id="L110">			}</span>
+			
+<span class="nc" id="L112">		}</span>
+<span class="nc" id="L113">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

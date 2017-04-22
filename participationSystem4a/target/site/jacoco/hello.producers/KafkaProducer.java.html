@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KafkaProducer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">participationSystem0</a> &gt; <a href="index.source.html" class="el_package">hello.producers</a> &gt; <span class="el_source">KafkaProducer.java</span></div><h1>KafkaProducer.java</h1><pre class="source lang-java linenums">package hello.producers;
+
+import org.apache.log4j.Logger;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
+
+import javax.annotation.ManagedBean;
+
+/**
+ * Created by herminio on 26/12/16.
+ */
+@ManagedBean
+public class KafkaProducer {
+
+<span class="fc" id="L17">    private static final Logger logger = Logger.getLogger(KafkaProducer.class);</span>
+
+    private KafkaTemplate&lt;String, String&gt; kafkaTemplate;
+
+<span class="fc" id="L21">    public KafkaProducer() {</span>
+<span class="fc" id="L22">		KafkaProducerFactory facotria = new KafkaProducerFactory();</span>
+		
+<span class="fc" id="L24">		this.kafkaTemplate = facotria.kafkaTemplate();</span>
+<span class="fc" id="L25">	}</span>
+    public void send(String topic, String data) {
+<span class="nc" id="L27">        ListenableFuture&lt;SendResult&lt;String, String&gt;&gt; future = kafkaTemplate.send(topic, data);</span>
+<span class="nc" id="L28">        future.addCallback(new ListenableFutureCallback&lt;SendResult&lt;String, String&gt;&gt;() {</span>
+            @Override
+            public void onSuccess(SendResult&lt;String, String&gt; result) {
+<span class="nc" id="L31">                logger.info(&quot;Success on sending message \&quot;&quot; + data + &quot;\&quot; to topic &quot; + topic);</span>
+<span class="nc" id="L32">            }</span>
+
+            @Override
+            public void onFailure(Throwable ex) {
+<span class="nc" id="L36">                logger.error(&quot;Error on sending message \&quot;&quot; + data + &quot;\&quot;, stacktrace &quot; + ex.getMessage());</span>
+<span class="nc" id="L37">            }</span>
+        });
+<span class="nc" id="L39">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

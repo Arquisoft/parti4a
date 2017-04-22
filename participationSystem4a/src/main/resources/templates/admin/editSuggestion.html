@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>ParticipationSystem</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/css/home.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/cat(idCat=all)}">participationSystem4a</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
+                    <li class="active" id="homeParticipation"><a href="#">Home</a></li>
+                    <li><a th:href="@{/goToAddWord}">Configuración</a></li>
+                    <li><a href="#">About us</a></li>
+                </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logOut}"><span class="glyphicon glyphicon-log-in"></span>Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+
+
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="page-header">
+                <h2>Edición de sugerencia</h2>
+            </div>
+            <div name="editaSugerencia">
+                <form th:action="@{/editSuggestion}" method="post">
+                    <div class="form-group row">
+                        <label for="titulo-text-input" class="col-2 col-form-label">Título</label>
+                        <div class="col-10">
+                            <input th:value="${suggestion.nombre}" name="tituloSugerencia" class="form-control" type="text"  id="titulo-text-input"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="contenido-text-area" class="col-2 col-form-label">Contenido</label>
+                        <div class="col-10">
+                            <textarea th:text="${suggestion.contenido}" name="contSugerencia" class="form-control" type="text"
+                                      id="contenido-text-area"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <input type="hidden" name="idSug" th:value="${suggestion.id}"/>
+                            <button type="submit" class="btn btn-info">Editar sugerencia</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p id="emailUser" th:text="${session.citizen.email}"></p>
+            </div>
+            <div class="well">
+                <p>ADS</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid text-center">
+    <p>ParticipantsSystem4a - ASW 2017 - Universidad de Oviedo</p>
+</footer>
+
+</body>
+</html>

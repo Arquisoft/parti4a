@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">participationSystem0</a> &gt; <a href="index.source.html" class="el_package">hello.services.impl</a> &gt; <span class="el_source">AdminServiceImpl.java</span></div><h1>AdminServiceImpl.java</h1><pre class="source lang-java linenums">package hello.services.impl;
+
+import hello.domain.Configuration;
+import hello.domain.Sugerencia;
+import hello.repository.ConfigurationRepository;
+import hello.repository.SuggestionRepository;
+import hello.services.AdminService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * 
+ * Servicios que necesia el adminsitrador del sistema.
+ *
+ */
+@Service
+<span class="fc" id="L20">public class AdminServiceImpl implements AdminService {</span>
+	private SuggestionRepository suggestionRepository;
+	private ConfigurationRepository configurationRepository;
+
+	@Override
+	public Configuration getConfiguracion() {
+		// // ANA Obtener configuracion
+		// return null;
+<span class="nc" id="L28">		Long id = new Long(1);</span>
+<span class="nc" id="L29">		Configuration config = this.configurationRepository.findOne(id);</span>
+<span class="nc" id="L30">		List&lt;Configuration&gt; listado = this.configurationRepository.findAll();</span>
+<span class="nc bnc" id="L31" title="All 4 branches missed.">		if (listado.size() == 0 || config == null) {</span>
+<span class="nc" id="L32">			loggerCutre.log(getClass(), &quot;No hay configuraciones asi que vamos a crear una nueva.&quot;);</span>
+<span class="nc" id="L33">			Configuration newC = new Configuration();</span>
+<span class="nc" id="L34">			this.configurationRepository.save(newC);</span>
+<span class="nc" id="L35">			return newC;</span>
+		}
+<span class="nc" id="L37">		return config;</span>
+	}
+
+	@Autowired
+	public void setConfigurationRepository(ConfigurationRepository configRepository) {
+<span class="fc" id="L42">		this.configurationRepository = configRepository;</span>
+<span class="fc" id="L43">	}</span>
+
+	@Autowired
+	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {
+<span class="fc" id="L47">		this.suggestionRepository = suggestionRepository;</span>
+<span class="fc" id="L48">	}</span>
+
+	@Override
+	public void setConfiguracion(Configuration config) {
+		// configurationRepository.save(new Configuration(&quot;mierda&quot;));
+		// configurationRepository.save(new Configuration(&quot;puta&quot;));
+		// configurationRepository.save(new Configuration(&quot;polla&quot;));
+		// configurationRepository.save(new Configuration(&quot;gilipollas&quot;));
+		// configurationRepository.save(new Configuration(&quot;hostia&quot;));
+		// configurationRepository.save(new Configuration(&quot;cabrón&quot;));
+		// configurationRepository.save(new Configuration(&quot;subnormal&quot;));
+		// configurationRepository.save(new Configuration(&quot;coño&quot;));
+		// configurationRepository.save(new Configuration(&quot;joder&quot;));
+		// ANA Establece la configuracion par ala base de datos
+		// Configuration antigua = getConfiguracion();
+		// this.configurationRepository.delete(antigua);
+<span class="nc" id="L64">		this.configurationRepository.deleteAll();</span>
+<span class="nc" id="L65">		this.configurationRepository.save(config);</span>
+<span class="nc" id="L66">		loggerCutre.log(getClass(), &quot;Se han borrado todas las configuraciones y se ha añadido una nueva.&quot;);</span>
+<span class="nc" id="L67">	}</span>
+
+	@Override
+	public void updateConfiguracion(Configuration config) {
+<span class="nc" id="L71">		this.configurationRepository.save(config);</span>
+<span class="nc" id="L72">		loggerCutre.log(getClass(), &quot;Se ha actualizado la configuracion del sistema.&quot;);</span>
+
+<span class="nc" id="L74">	}</span>
+
+	@Override
+	public void addPalabraProhibida(String word) {
+		try {
+<span class="nc" id="L79">			Configuration antigua = getConfiguracion();</span>
+<span class="nc" id="L80">			loggerCutre.log(getClass(), &quot;Tengo estas palabras en la config &quot;+antigua.getPalabraNoPermitida());</span>
+<span class="nc" id="L81">			antigua.addPalabraNoPermitida(word);</span>
+<span class="nc" id="L82">			updateConfiguracion(antigua);</span>
+<span class="nc" id="L83">			loggerCutre.log(getClass(),</span>
+<span class="nc" id="L84">					&quot;Se ha añadido una palabra prohibida, ahora tengo: \n\n\t&quot; + antigua.getPalabraNoPermitida());</span>
+<span class="nc" id="L85">		} catch (Exception e) {</span>
+<span class="nc" id="L86">			loggerCutre.log(getClass(), &quot;ERROR al añadir una palabra: \n\n\t&quot; + e.getMessage());</span>
+<span class="nc" id="L87">		}</span>
+<span class="nc" id="L88">	}</span>
+
+	@Override
+	public Sugerencia editarSugerencia(Sugerencia antigua, String nuevoNombre, String nuevoContenido) {
+<span class="nc bnc" id="L92" title="All 4 branches missed.">		if (!&quot;&quot;.equals(nuevoNombre) || nuevoNombre != null) {</span>
+<span class="nc" id="L93">			antigua.setNombre(nuevoNombre);</span>
+		}
+<span class="nc bnc" id="L95" title="All 4 branches missed.">		if (!&quot;&quot;.equals(nuevoContenido) || nuevoContenido != null) {</span>
+<span class="nc" id="L96">			antigua.setContenido(nuevoContenido);</span>
+		}
+<span class="nc" id="L98">		suggestionRepository.save(antigua);</span>
+
+<span class="nc" id="L100">		return antigua;</span>
+	}
+
+	@Override
+	public void setMinimoVotos(int minVotes) {
+<span class="nc" id="L105">		Configuration config = getConfiguracion();</span>
+<span class="nc" id="L106">		config.setMinimoVotos(minVotes);</span>
+<span class="nc" id="L107">		updateConfiguracion(config);</span>
+<span class="nc" id="L108">		loggerCutre.log(getClass(), &quot;Se ha actualizado el minimo de votos a &quot; + minVotes);</span>
+<span class="nc" id="L109">	}</span>
+
+	@Override
+	public int getMinimoVotos() {
+<span class="nc" id="L113">		Configuration config = getConfiguracion();</span>
+<span class="nc" id="L114">		int value = config.getMinimoVotos();</span>
+<span class="nc" id="L115">		loggerCutre.log(getClass(), &quot;El numero de votos minimos de la configuracion es &quot; + value);</span>
+
+<span class="nc" id="L117">		return value;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,0 +1,386 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>ParticipationSystem</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <style>
+
+        .panel-shadow {
+            box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+        }
+        .panel-white {
+            border: 1px solid #dddddd;
+        }
+        .panel-white  .panel-heading {
+            color: #333;
+            background-color: #fff;
+            border-color: #ddd;
+        }
+        .panel-white  .panel-footer {
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+        .post .post-heading {
+            height: 95px;
+            padding: 20px 15px;
+        }
+        .post .post-heading .avatar {
+            width: 60px;
+            height: 60px;
+            display: block;
+            margin-right: 15px;
+        }
+        .post .post-heading .meta .title {
+            margin-bottom: 0;
+        }
+        .post .post-heading .meta .title a {
+            color: black;
+        }
+        .post .post-heading .meta .title a:hover {
+            color: #aaaaaa;
+        }
+        .post .post-heading .meta .time {
+            margin-top: 8px;
+            color: #999;
+        }
+        .post .post-image .image {
+            width: 100%;
+            height: auto;
+        }
+        .post .post-description {
+            padding: 15px;
+        }
+        .post .post-description p {
+            font-size: 14px;
+        }
+        .post .post-description .stats {
+            margin-top: 20px;
+        }
+        .post .post-description .stats .stat-item {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        .post .post-description .stats .stat-item .icon {
+            margin-right: 8px;
+        }
+        .post .post-footer {
+            border-top: 1px solid #ddd;
+            padding: 15px;
+        }
+        .post .post-footer .input-group-addon a {
+            color: #454545;
+        }
+        .post .post-footer .comments-list {
+            padding: 0;
+            margin-top: 20px;
+            list-style-type: none;
+        }
+        .post .post-footer .comments-list .comment {
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .post .post-footer .comments-list .comment .avatar {
+            width: 35px;
+            height: 35px;
+        }
+        .post .post-footer .comments-list .comment .comment-heading {
+            display: block;
+            width: 100%;
+        }
+        .post .post-footer .comments-list .comment .comment-heading .user {
+            font-size: 14px;
+            font-weight: bold;
+            display: inline;
+            margin-top: 0;
+            margin-right: 10px;
+        }
+        .post .post-footer .comments-list .comment .comment-heading .time {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 0;
+            display: inline;
+        }
+        .post .post-footer .comments-list .comment .comment-body {
+            margin-left: 50px;
+        }
+        .post .post-footer .comments-list .comment > .comments-list {
+            margin-left: 50px;
+        }
+
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 450px}
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height:auto;}
+        }
+        body{ background: #fafafa;}
+        .widget-area.blank {
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            -ms-box-shadow: none;
+            -o-box-shadow: none;
+            box-shadow: none;
+        }
+        body .no-padding {
+            padding: 0;
+        }
+        .widget-area {
+            background-color: #fff;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+            -ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+            -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+            float: left;
+            margin-top: 30px;
+            padding: 25px 30px;
+            position: relative;
+            width: 100%;
+        }
+        .status-upload {
+            background: none repeat scroll 0 0 #f5f5f5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+            float: left;
+            width: 100%;
+        }
+        .status-upload form {
+            float: left;
+            width: 100%;
+        }
+        .status-upload form textarea {
+            background: none repeat scroll 0 0 #fff;
+            border: medium none;
+            -webkit-border-radius: 4px 4px 0 0;
+            -moz-border-radius: 4px 4px 0 0;
+            -ms-border-radius: 4px 4px 0 0;
+            -o-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+            color: #777777;
+            float: left;
+            font-family: Lato;
+            font-size: 14px;
+            height: 142px;
+            letter-spacing: 0.3px;
+            padding: 20px;
+            width: 100%;
+            resize:vertical;
+            outline:none;
+            border: 1px solid #F2F2F2;
+        }
+
+        .status-upload ul {
+            float: left;
+            list-style: none outside none;
+            margin: 0;
+            padding: 0 0 0 15px;
+            width: auto;
+        }
+        .status-upload ul > li {
+            float: left;
+        }
+        .status-upload ul > li > a {
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+            color: #777777;
+            float: left;
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+            margin: 10px 0 10px 10px;
+            text-align: center;
+            -webkit-transition: all 0.4s ease 0s;
+            -moz-transition: all 0.4s ease 0s;
+            -ms-transition: all 0.4s ease 0s;
+            -o-transition: all 0.4s ease 0s;
+            transition: all 0.4s ease 0s;
+            width: 30px;
+            cursor: pointer;
+        }
+        .status-upload ul > li > a:hover {
+            background: none repeat scroll 0 0 #606060;
+            color: #fff;
+        }
+        .status-upload form button {
+            border: medium none;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+            color: #fff;
+            float: right;
+            font-family: Lato;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            margin-right: 9px;
+            margin-top: 9px;
+            padding: 6px 15px;
+        }
+        .dropdown > a > span.green:before {
+            border-left-color: #2dcb73;
+        }
+        .status-upload form button > i {
+            margin-right: 7px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/cat(idCat=all)}">participationSystem4a</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a th:href="@{/createSuggestion}">Crear Sugerencia</a></li>
+                <li><a href="#">Crear Categoría</a></li>
+                <li><a href="#">About us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logOut}"><span class="glyphicon glyphicon-log-in"></span>Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <strong>Categorias</strong>
+            <p><a th:href="@{/cat(idCat=all)}">Todas</a></p>
+            <p th:each="categoria : ${session.listaCategorias}">
+                <a th:text="${categoria.nombre}" th:href="@{/cat(idCat=${categoria.getId()})}">categoria</a>
+            </p>
+
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="page-header">
+                <h2 th:text="${sugerencia.nombre}"></h2>
+            </div>
+            <p th:text="${sugerencia.contenido}"></p>
+            <div name="creacionComentario">
+            <div class="col-md-6">
+                <div class="widget-area no-padding blank">
+                    <div class="status-upload">
+                        <form th:action="@{/comment}" method="post">
+                            <input name="idSug" type="hidden" th:value="${sugerencia.id}"/>
+                            <textarea name="comentario" placeholder="¿Qué opinas sobre esta propuesta?" ></textarea>
+                            <ul>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
+                            </ul>
+                            <button  type="submit" class="btn btn-success green"><i class="fa fa-share"></i>Comentar</button>
+                        </form>
+                    </div><!-- Status Upload  -->
+                </div><!-- Widget Area -->
+            </div>
+        </div>
+            <div name="comentarios">
+
+
+                <div th:each="comentario : ${sugerencia.comentarios}" class="col-sm-8">
+                    <div class="panel panel-white post panel-shadow">
+                        <div class="post-heading">
+                            <div class="pull-left image">
+                                <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+                            </div>
+                            <div class="pull-left meta">
+                                <div class="title h5">
+                                    <b th:text="${comentario.usuario.nombre}" >Ryan Haywood</b>
+                                    hizo un comentario.
+                                </div>
+                                <h6 class="text-muted time">1 minute ago</h6>
+                            </div>
+                        </div>
+                        <div class="post-description">
+                            <p th:text="${comentario.contenido}">Bootdey is a gallery of free
+                                snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
+                            <div class="stats">
+                                <a href="#" class="btn btn-default stat-item">
+                                    <i class="fa fa-thumbs-up icon"></i>2
+                                </a>
+                                <a href="#" class="btn btn-default stat-item">
+                                    <i class="fa fa-thumbs-down icon"></i>12
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p id="emailUser" th:text="${session.citizen.email}"></p>
+            </div>
+            <div class="well">
+                <p>ADS</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid text-center">
+    <p>ParticipantsSystem4a - ASW 2017 - Universidad de Oviedo</p>
+
+</footer>
+
+</body>
+</html>

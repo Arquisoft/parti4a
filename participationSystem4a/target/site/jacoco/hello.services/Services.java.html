@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Services.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">participationSystem0</a> &gt; <a href="index.source.html" class="el_package">hello.services</a> &gt; <span class="el_source">Services.java</span></div><h1>Services.java</h1><pre class="source lang-java linenums">package hello.services;
+
+import hello.services.impl.AdminServiceImpl;
+import hello.services.impl.CategoryServiceImpl;
+import hello.services.impl.CitizenServiceImpl;
+import hello.services.impl.CommentServiceImpl;
+import hello.services.impl.SuggestionServiceImpl;
+import hello.services.impl.SystemServicesImpl;
+
+
+//SOBRA
+<span class="nc" id="L12">public class Services {</span>
+
+	public static CitizenService getCitizenServices() {
+<span class="nc" id="L15">		return new CitizenServiceImpl();</span>
+	}
+
+	public static AdminService getAdminServices() {
+<span class="nc" id="L19">		return new AdminServiceImpl();</span>
+	}
+
+	public static SystemServices getSystemServices() {
+<span class="nc" id="L23">		return new SystemServicesImpl();</span>
+	}
+	
+	public static CategoryService getCategoryService(){
+<span class="nc" id="L27">		return new CategoryServiceImpl();</span>
+	}
+	
+	public static CommentService getCommentService(){
+<span class="nc" id="L31">		return new CommentServiceImpl();</span>
+	}
+	
+	public static SuggestionService getSuggestionService(){
+<span class="nc" id="L35">		return new SuggestionServiceImpl();</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
