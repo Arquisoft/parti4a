@@ -6,15 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kafka.producers.Topics;
 import participationSystem.domain.Categoria;
 import participationSystem.domain.Citizen;
 import participationSystem.domain.Configuration;
 import participationSystem.domain.Sugerencia;
-import participationSystem.producers.Topics;
-import participationSystem.repository.ConfigurationRepository;
-import participationSystem.repository.SuggestionRepository;
 import participationSystem.services.SuggestionService;
 import participationSystem.util.exception.CitizenException;
+import repository.ConfigurationRepository;
+import repository.SuggestionRepository;
 
 /**
  * Created by pelay on 29/03/2017.

@@ -6,13 +6,13 @@ import java.util.Set;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
+import kafka.producers.SingletonKafkaProducer;
 import participationSystem.Message;
 import participationSystem.controllers.CitizenController;
 import participationSystem.domain.Categoria;
 import participationSystem.domain.Comentario;
 import participationSystem.domain.Configuration;
 import participationSystem.domain.Sugerencia;
-import participationSystem.producers.SingletonKafkaProducer;
 import participationSystem.services.CategoryService;
 import participationSystem.services.CommentService;
 import participationSystem.services.Services;

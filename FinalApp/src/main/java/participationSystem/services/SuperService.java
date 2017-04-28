@@ -1,8 +1,8 @@
 package participationSystem.services;
 
-import participationSystem.producers.KafkaProducer;
-import participationSystem.producers.SingletonKafkaProducer;
-import participationSystem.producers.Topics;
+import kafka.producers.KafkaProducer;
+import kafka.producers.SingletonKafkaProducer;
+import kafka.producers.Topics;
 import participationSystem.util.loggercutre.LoggerCutre;
 import participationSystem.util.loggercutre.SingletonLoggerCutre;
 

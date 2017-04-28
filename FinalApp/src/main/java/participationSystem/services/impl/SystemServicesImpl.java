@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import participationSystem.domain.Categoria;
 import participationSystem.domain.Configuration;
 import participationSystem.domain.Sugerencia;
-import participationSystem.repository.CategoryRepository;
-import participationSystem.repository.CommentRepository;
-import participationSystem.repository.ConfigurationRepository;
-import participationSystem.repository.SuggestionRepository;
 import participationSystem.services.SystemServices;
+import repository.CategoryRepository;
+import repository.CommentRepository;
+import repository.ConfigurationRepository;
+import repository.SuggestionRepository;
 
 import java.util.ArrayList;
 import java.util.List;

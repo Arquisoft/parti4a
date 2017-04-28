@@ -3,13 +3,13 @@ package participationSystem.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kafka.producers.Topics;
 import participationSystem.domain.Citizen;
 import participationSystem.domain.Comentario;
 import participationSystem.domain.Sugerencia;
-import participationSystem.producers.Topics;
-import participationSystem.repository.CommentRepository;
 import participationSystem.services.CommentService;
 import participationSystem.util.exception.CitizenException;
+import repository.CommentRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService {

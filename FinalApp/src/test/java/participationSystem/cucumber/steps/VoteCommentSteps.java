@@ -10,8 +10,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import participationSystem.domain.Sugerencia;
-import participationSystem.repository.CommentRepository;
-import participationSystem.repository.SuggestionRepository;
+import repository.CommentRepository;
+import repository.SuggestionRepository;
 
 public class VoteCommentSteps extends SuperSteps{
 	@Autowired

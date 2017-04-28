@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 import participationSystem.domain.Configuration;
 import participationSystem.domain.Sugerencia;
-import participationSystem.repository.ConfigurationRepository;
-import participationSystem.repository.SuggestionRepository;
 import participationSystem.services.AdminService;
+import repository.ConfigurationRepository;
+import repository.SuggestionRepository;
 
 import java.util.List;
 

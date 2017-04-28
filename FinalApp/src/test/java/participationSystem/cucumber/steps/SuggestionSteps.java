@@ -10,9 +10,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import participationSystem.domain.Categoria;
 import participationSystem.domain.Sugerencia;
-import participationSystem.repository.CategoryRepository;
-import participationSystem.repository.SuggestionRepository;
 import participationSystem.util.SeleniumUtils;
+import repository.CategoryRepository;
+import repository.SuggestionRepository;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

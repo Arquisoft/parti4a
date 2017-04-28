@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import participationSystem.domain.Categoria;
 import participationSystem.domain.Citizen;
-import participationSystem.repository.CategoryRepository;
-import participationSystem.repository.CitizenRepository;
 import participationSystem.services.CitizenService;
 import participationSystem.util.exception.CitizenException;
+import repository.CategoryRepository;
+import repository.CitizenRepository;
 
 import java.util.List;
 

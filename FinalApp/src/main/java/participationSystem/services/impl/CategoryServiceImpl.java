@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import participationSystem.domain.Categoria;
-import participationSystem.repository.CategoryRepository;
 import participationSystem.services.CategoryService;
 import participationSystem.util.exception.CitizenException;
+import repository.CategoryRepository;
 
 import java.util.List;
 

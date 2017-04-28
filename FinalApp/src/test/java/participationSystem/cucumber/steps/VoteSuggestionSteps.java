@@ -13,10 +13,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import participationSystem.domain.Citizen;
 import participationSystem.domain.Sugerencia;
-import participationSystem.repository.CitizenRepository;
-import participationSystem.repository.CommentRepository;
-import participationSystem.repository.SuggestionRepository;
 import participationSystem.util.SeleniumUtils;
+import repository.CitizenRepository;
+import repository.CommentRepository;
+import repository.SuggestionRepository;
 
 @Service
 public class VoteSuggestionSteps extends SuperSteps {
