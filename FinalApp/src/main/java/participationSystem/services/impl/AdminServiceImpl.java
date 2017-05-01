@@ -42,6 +42,8 @@ public class AdminServiceImpl implements AdminService {
 		this.configurationRepository = configRepository;
 	}
 
+
+
 	@Autowired
 	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {
 		this.suggestionRepository = suggestionRepository;

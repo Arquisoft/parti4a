@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 @ComponentScan
 @EntityScan
-@EnableJpaRepositories
+@EnableJpaRepositories("repository")
 public class Application {
 	private static ConfigurableApplicationContext applicationInstance;
     public static void main(String[] args) {
