@@ -1,7 +1,7 @@
 package participationSystem.services;
 
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 public interface AdminService extends SuperService{
 	

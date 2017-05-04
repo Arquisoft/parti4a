@@ -1,26 +1,24 @@
 package participationSystem.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
 import participationSystem.services.SystemServices;
 import repository.CategoryRepository;
-import repository.CommentRepository;
 import repository.ConfigurationRepository;
 import repository.SuggestionRepository;
-
-import java.util.ArrayList;
-import java.util.List;
+import repository.domain.Categoria;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 @Service
 public class SystemServicesImpl implements SystemServices {
 
 	//private Configuration config = null;
 	private ConfigurationRepository configurationRepository;
-	private CommentRepository commentRepository;
 	private SuggestionRepository suggestionRepository;
 	private CategoryRepository categoryRepository;
 	
@@ -41,13 +39,6 @@ public class SystemServicesImpl implements SystemServices {
 	public void setConfigurationRepository(ConfigurationRepository configurationRepository) {
 		this.configurationRepository = configurationRepository;
 	}
-
-
-	@Autowired
-	public void setCommentRepository(CommentRepository commentRepository) {
-		this.commentRepository = commentRepository;
-	}
-
 
 	@Autowired
 	public void setSuggestionRepository(SuggestionRepository suggestionRepository) {

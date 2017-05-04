@@ -9,9 +9,9 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import participationSystem.domain.Sugerencia;
 import repository.CommentRepository;
 import repository.SuggestionRepository;
+import repository.domain.Sugerencia;
 
 public class VoteCommentSteps extends SuperSteps{
 	@Autowired

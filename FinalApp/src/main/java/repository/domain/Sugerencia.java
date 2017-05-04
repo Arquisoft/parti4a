@@ -1,4 +1,4 @@
-package participationSystem.domain;
+package repository.domain;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +12,7 @@ public class Sugerencia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private int votos;
+	private int votosTotales;
 	private String nombre;
 	private String contenido;
 	@OneToMany(mappedBy = "sugerencia", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -113,6 +114,13 @@ public class Sugerencia {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	public int getVotosTotales() {
+		return votosTotales;
+	}
+
+	public void setVotosTotales(int votosTotales) {
+		this.votosTotales = votosTotales;
+	}
 	public void addComentario(Comentario c) {
 		this.comentarios.add(c);
 	}
@@ -131,10 +139,12 @@ public class Sugerencia {
 
 	public void incrementarVotos() {
 		this.votos++;
+		this.votosTotales++;
 	}
 
 	public void decrementarVotos() {
 		this.votos--;
+		this.votosTotales++;
 	}
 
 	public void addCiudadanoHaVotado(Citizen ciudadano) {

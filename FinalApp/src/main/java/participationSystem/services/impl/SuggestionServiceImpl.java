@@ -7,18 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kafka.producers.Topics;
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Citizen;
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
 import participationSystem.services.SuggestionService;
 import participationSystem.util.exception.CitizenException;
 import repository.ConfigurationRepository;
 import repository.SuggestionRepository;
+import repository.domain.Categoria;
+import repository.domain.Citizen;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
-/**
- * Created by pelay on 29/03/2017.
- */
 @Service
 public class SuggestionServiceImpl implements SuggestionService {
     private SuggestionRepository suggestionRepository;

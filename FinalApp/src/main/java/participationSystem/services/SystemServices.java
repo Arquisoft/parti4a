@@ -2,10 +2,9 @@ package participationSystem.services;
 
 import java.util.List;
 
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
-
+import repository.domain.Categoria;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 
 public interface SystemServices extends SuperService{

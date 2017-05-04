@@ -2,10 +2,10 @@ package participationSystem.services;
 
 import java.util.List;
 
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Citizen;
-import participationSystem.domain.Sugerencia;
 import participationSystem.util.exception.CitizenException;
+import repository.domain.Categoria;
+import repository.domain.Citizen;
+import repository.domain.Sugerencia;
 
 /**
  * Created by pelay on 29/03/2017.

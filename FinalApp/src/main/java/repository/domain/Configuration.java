@@ -1,4 +1,4 @@
-package participationSystem.domain;
+package repository.domain;
 
 import javax.persistence.*;
 

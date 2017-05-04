@@ -1,23 +1,25 @@
 package participationSystem;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 import kafka.producers.SingletonKafkaProducer;
-import participationSystem.Message;
 import participationSystem.controllers.CitizenController;
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Comentario;
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
 import participationSystem.services.CategoryService;
 import participationSystem.services.CommentService;
 import participationSystem.services.Services;
 import participationSystem.services.SuggestionService;
 import participationSystem.util.exception.CitizenException;
+import repository.domain.Categoria;
+import repository.domain.Comentario;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 public class TestLogic {
 
