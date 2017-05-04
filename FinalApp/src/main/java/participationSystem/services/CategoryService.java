@@ -2,8 +2,8 @@ package participationSystem.services;
 
 import java.util.List;
 
-import participationSystem.domain.Categoria;
 import participationSystem.util.exception.CitizenException;
+import repository.domain.Categoria;
 
 /**
  * Created by pelay on 30/03/2017.

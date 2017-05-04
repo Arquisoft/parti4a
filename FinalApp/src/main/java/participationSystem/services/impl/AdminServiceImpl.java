@@ -1,15 +1,15 @@
 package participationSystem.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
 import participationSystem.services.AdminService;
 import repository.ConfigurationRepository;
 import repository.SuggestionRepository;
-
-import java.util.List;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 /**
  * 
@@ -38,8 +38,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Autowired
-	public void setConfigurationRepository(ConfigurationRepository configRepository) {
-		this.configurationRepository = configRepository;
+	public void setConfigurationRepository(ConfigurationRepository configurationRepository) {
+		this.configurationRepository = configurationRepository;
 	}
 
 

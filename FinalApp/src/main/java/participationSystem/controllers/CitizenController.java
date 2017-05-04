@@ -1,5 +1,9 @@
 package participationSystem.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -9,15 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Citizen;
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
-import participationSystem.services.*;
+import participationSystem.services.CategoryService;
+import participationSystem.services.CitizenService;
+import participationSystem.services.CommentService;
+import participationSystem.services.SuggestionService;
+import participationSystem.services.SystemServices;
 import participationSystem.util.exception.CitizenException;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import repository.domain.Categoria;
+import repository.domain.Citizen;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 /**
  * Created by pelay on 28/03/2017.

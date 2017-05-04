@@ -1,9 +1,10 @@
 package participationSystem.services;
 
-import participationSystem.domain.Citizen;
-import participationSystem.domain.Comentario;
-import participationSystem.domain.Sugerencia;
+
 import participationSystem.util.exception.CitizenException;
+import repository.domain.Citizen;
+import repository.domain.Comentario;
+import repository.domain.Sugerencia;
 
 public interface CommentService extends SuperService{
 

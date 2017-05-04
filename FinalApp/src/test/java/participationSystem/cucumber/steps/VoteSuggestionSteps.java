@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import participationSystem.domain.Citizen;
-import participationSystem.domain.Sugerencia;
 import participationSystem.util.SeleniumUtils;
 import repository.CitizenRepository;
 import repository.CommentRepository;
 import repository.SuggestionRepository;
+import repository.domain.Citizen;
+import repository.domain.Sugerencia;
 
 @Service
 public class VoteSuggestionSteps extends SuperSteps {

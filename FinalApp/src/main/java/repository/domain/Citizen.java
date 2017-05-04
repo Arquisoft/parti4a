@@ -1,4 +1,4 @@
-package participationSystem.domain;
+package repository.domain;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.validator.constraints.Email;

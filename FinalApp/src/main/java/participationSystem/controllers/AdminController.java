@@ -1,5 +1,9 @@
 package participationSystem.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -7,14 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import participationSystem.domain.Configuration;
-import participationSystem.domain.Sugerencia;
 import participationSystem.services.AdminService;
 import participationSystem.services.SuggestionService;
 import participationSystem.services.SystemServices;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import repository.domain.Configuration;
+import repository.domain.Sugerencia;
 
 /**
  * Created by pelay on 02/04/2017.

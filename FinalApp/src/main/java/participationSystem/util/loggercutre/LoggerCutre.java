@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import scala.sys.process.ProcessBuilderImpl.FileOutput;
 
 /**
  * Logger de consola muy cutre

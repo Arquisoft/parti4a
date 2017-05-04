@@ -1,16 +1,16 @@
 package participationSystem.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import participationSystem.domain.Categoria;
-import participationSystem.domain.Citizen;
 import participationSystem.services.CitizenService;
 import participationSystem.util.exception.CitizenException;
 import repository.CategoryRepository;
 import repository.CitizenRepository;
-
-import java.util.List;
+import repository.domain.Categoria;
+import repository.domain.Citizen;
 
 @Service
 public class CitizenServiceImpl implements CitizenService {
