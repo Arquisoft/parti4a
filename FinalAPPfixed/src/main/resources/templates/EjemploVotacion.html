@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Votaciones</title>
+</head>
+<body>
+
+	<section id="loginSection">
+	<h1>Votar depende ti. VOTA!!!!</h1>
+		<form id="login-form" role="form" th:action="@{/votoPositivo}">
+			
+			<div>
+				<button type="submit"  id="button">Voto Positivo</button>
+			</div>
+			
+			<br></br>
+			
+		</form>
+		<form id="login-form2" role="form2" th:action="@{/votoNegativo}">
+			
+			<div>
+				<button type="submit"  id="button2">Voto Negativo</button>
+			</div>
+			
+			<br></br>
+			
+		</form>
+		
+		</form>
+		<form id="login-form3" role="form3" th:action="@{/update}">
+			
+			<div>
+				<button type="submit"  id="button3">Updates</button>
+			</div>
+		</form>
+	</section>
+
+</body>
+</html>

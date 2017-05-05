@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Dashboard</title>
+
+</head>
+<body>
+<h1>Dashboard</h1>
+<h2>Receiving messages:</h2>
+
+<div id="messages">
+<div th:each="item: ${data}">
+     	<p th:text="${item}" />
+</div>
+</div>
+
+<script>
+setTimeout('document.location.reload()',10000);
+</script>
+
+</body>
+</html>
