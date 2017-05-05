@@ -31,11 +31,9 @@ import java.util.List;
 @Scope("session")
 public class CitizenController {
 
-	public static List<SseEmitter> sseEmitters = Collections
-			.synchronizedList(new ArrayList<>());
-	
-	 private KafkaProducer kafkaProducer= new KafkaProducer();
-	 
+	public static List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
+
+	private KafkaProducer kafkaProducer = new KafkaProducer();
 
 	private String idCat = "all";
 
@@ -76,14 +74,12 @@ public class CitizenController {
 	 */
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public String getLogin(@RequestParam String email,
-			@RequestParam String password, HttpSession session, Model model) {
+	public String getLogin(@RequestParam String email, @RequestParam String password, HttpSession session,
+			Model model) {
 
 		Citizen citizen = citizenService.getCitizen(email);
 
-		if (citizen != null
-				&& DigestUtils.sha512Hex(password).equals(
-						citizen.getContrasena())) {
+		if (citizen != null && DigestUtils.sha512Hex(password).equals(citizen.getContrasena())) {
 			session.setAttribute("citizen", citizen);
 			if (!citizen.isAdmin()) {
 				if (citizen.getNombre().equals("Concejal")) {
@@ -92,8 +88,7 @@ public class CitizenController {
 				}
 				List<Sugerencia> listaSugerencias = getSugerencias(null);
 				session.setAttribute("listaSugerencias", listaSugerencias);
-				session.setAttribute("listaCategorias",
-						categoryService.findAll());
+				session.setAttribute("listaCategorias", categoryService.findAll());
 
 				return "/user/index";
 
@@ -101,10 +96,8 @@ public class CitizenController {
 
 			else {
 				Configuration configuration = systemService.getConfiguration();
-				model.addAttribute("listaPalabras",
-						configuration.getPalabrasNoPermitidas());
-				List<Sugerencia> listaSugerencias = suggestionService
-						.findSugerenciaWithMinVotes();
+				model.addAttribute("listaPalabras", configuration.getPalabrasNoPermitidas());
+				List<Sugerencia> listaSugerencias = suggestionService.findSugerenciaWithMinVotes();
 				session.setAttribute("listaSugerencias", listaSugerencias);
 
 				return "/admin/adminIndex";
@@ -116,8 +109,7 @@ public class CitizenController {
 	}
 
 	@RequestMapping(value = "/cat")
-	public String getSugerenciasCat(@RequestParam String idCat,
-			HttpSession session, Model model) {
+	public String getSugerenciasCat(@RequestParam String idCat, HttpSession session, Model model) {
 		this.idCat = idCat;
 		putSugerenciasInSession(session);
 
@@ -126,13 +118,11 @@ public class CitizenController {
 
 	private void putSugerenciasInSession(HttpSession session) {
 		if ("all".equals(idCat)) {
-			session.setAttribute("listaSugerencias",
-					suggestionService.findAll());
+			session.setAttribute("listaSugerencias", suggestionService.findAll());
 		} else {
 			Long id = Long.parseLong(idCat);
 			Categoria cat = categoryService.findById(id);
-			session.setAttribute("listaSugerencias",
-					suggestionService.findByCat(cat));
+			session.setAttribute("listaSugerencias", suggestionService.findByCat(cat));
 
 		}
 	}
@@ -185,8 +175,7 @@ public class CitizenController {
 	}
 
 	@RequestMapping(value = "/comment")
-	public String addComment(@RequestParam String idSug, String comentario,
-			Model model, HttpSession session) {
+	public String addComment(@RequestParam String idSug, String comentario, Model model, HttpSession session) {
 		Long id = Long.parseLong(idSug);
 		Sugerencia sugerencia = suggestionService.findById(id);
 		Citizen citizen = (Citizen) session.getAttribute("citizen");
@@ -199,15 +188,12 @@ public class CitizenController {
 	@RequestMapping(value = "/createSuggestion")
 	public String addComment(Model model) {
 		model.addAttribute("listaCategorias", categoryService.findAll());
-
 		return "/user/createSuggestion";
 	}
 
 	@RequestMapping(value = "/submitSuggestion")
-	public String addSuggestion(@RequestParam String tituloSugerencia,
-			@RequestParam String idCategoria,
-			@RequestParam String contSugerencia, HttpSession session,
-			Model model) {
+	public String addSuggestion(@RequestParam String tituloSugerencia, @RequestParam String idCategoria,
+			@RequestParam String contSugerencia, HttpSession session, Model model) {
 		Citizen citizen = (Citizen) session.getAttribute("citizen");
 		Long idCat = Long.parseLong(idCategoria);
 		Categoria categoria = categoryService.findById(idCat);
@@ -218,14 +204,14 @@ public class CitizenController {
 		}
 
 		try {
-			suggestionService.createSugerencia(citizen, categoria,
-					tituloSugerencia, contSugerencia);
+			suggestionService.createSugerencia(citizen, categoria, tituloSugerencia, contSugerencia);
 		} catch (CitizenException e) {
 			e.printStackTrace();
 		}
 
 		List<Sugerencia> listaSugerencias = getSugerencias(null);
 		session.setAttribute("listaSugerencias", listaSugerencias);
+		kafkaProducer.send("update", "actualizando");
 		return "/user/index";
 	}
 

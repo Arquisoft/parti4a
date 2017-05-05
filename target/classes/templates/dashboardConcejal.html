@@ -2,6 +2,9 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
+      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    		<script type="text/javascript">
    		 function connect () {
@@ -100,11 +103,17 @@ function drawChart(sugerencias) {
      </script>
 </head>
 <body onload ="connect();">
-<div id="container" style="width:100%; height:100%; margin: 0 auto">
- <canvas id="Chart" style="width:100%; height:100%; margin: 0 auto" ></canvas>
+<div class="alert alert-info alert-dismissable fade in">
+<strong>Eventos:</strong>
+<br/>
+<div id="comment" >
+</div>
 </div>
 
-<div id="comment" class="w3-panel w3-green w3-round" color="blue">
+<div id="container" style="width:95%; height:95%; margin: 0 auto">
+ <canvas id="Chart" style="width:95%; height:95%; margin: 0 auto" ></canvas>
 </div>
+
+
 </body>
 </html>
