@@ -16,3 +16,4 @@ Skeleton of participants module
 - Javier Castro Fernández (@javiercasfer95 | @javitxu1995)
 - Ana Bravo Mediavilla (@anabravo25)
 - Pelayo García Lartategui (@pelayolartategui)
+- Alan Padierna Fernández (@AlanPadi95)
