@@ -1,3 +1,0 @@
-CitizensLoader TXT
-
-Esto es un txt muy básico
