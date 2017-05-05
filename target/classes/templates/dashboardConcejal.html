@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   		<script type="text/javascript">
+   		 function connect () {
+                var source = new EventSource('/register');
+                
+                comments = new EventSource('/register2');
+				
+                // Handle correct opening of connection
+                source.addEventListener('open', function (e) {
+                    console.log('Connected.');
+                });
+                
+                // Update the state when ever a message is sent
+                source.addEventListener('message', function (e) {
+                	console.log("Message received");
+                	console.log(e);
+                	var sugerencias = JSON.parse(e.data);
+                	//sugerencias = Object.keys(json_data).map(function (key) { return json_data[key]; });
+                    console.log(sugerencias);
+                    //console.log("New state positive: " + state.textPositivo);
+                    //console.log("New state negative: " + state.textNegativo);
+					drawChart(sugerencias);
+                }, false);
+                
+                
+			
+                // Reconnect if the connection fails
+                source.addEventListener('error', function (e) {
+                    console.log('Disconnected.');
+                    if (e.readyState == EventSource.CLOSED) {
+                        connected = false;
+                        connect();
+                    }
+                }, false);
+                
+                // Handle correct opening of connection
+                comments.addEventListener('open', function (e) {
+                    console.log('Connected.');
+                });
+                
+                // Update the state when ever a message is sent
+                comments.addEventListener('message', function (e) {
+                	console.log("Message received");
+                	console.log(e.data);
+                	//var comment = JSON.parse(e.data);
+                	var element = document.getElementById("comment");
+                	element.innerHTML = e.data;
+                }, false);
+                
+                
+			
+                // Reconnect if the connection fails
+                comments.addEventListener('error', function (e) {
+                    console.log('Disconnected.');
+                    if (e.readyState == EventSource.CLOSED) {
+                        connected = false;
+                        connect();
+                    }
+                }, false);
+   		
+   		};
+   		  google.charts.load('current', {packages: ['corechart', 'bar']});
+		  google.charts.setOnLoadCallback(drawChart);
+
+function drawChart(sugerencias) {
+     data = new google.visualization.DataTable();
+     //document.getElementById('container').innerHtml = '';
+     console.log(sugerencias);
+     materialChart = new google.charts.Bar(document.getElementById('container'));
+ 
+     data.addColumn('string','Sugerencias');
+     data.addColumn('number','Votos positivos');
+          
+     var a=0;
+     for(var i in sugerencias){
+     	data.addRows([[sugerencias[a].nombre,sugerencias[a].votosP]]);
+      	a++;
+      }
+      
+      var materialOptions = {
+          chart: {
+          title: 'Sugerencias con sus votos (negativos y positivos)'
+        },
+        hAxis: {
+          title: 'Total Population',
+          minValue: 0,
+        },
+        vAxis: {
+          title: 'City'
+        },
+        bars: 'horizontal'
+      };
+      materialChart.draw(data, materialOptions);
+    
+    }        
+     </script>
+</head>
+<body onload ="connect();">
+<div id="container" style="width:100%; height:100%; margin: 0 auto">
+ <canvas id="Chart" style="width:100%; height:100%; margin: 0 auto" ></canvas>
+</div>
+
+<div id="comment" class="w3-panel w3-green w3-round" color="blue">
+</div>
+</body>
+</html>
