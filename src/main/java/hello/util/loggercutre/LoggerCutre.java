@@ -1,14 +1,11 @@
 package hello.util.loggercutre;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import scala.sys.process.ProcessBuilderImpl.FileOutput;
 
 /**
  * Logger de consola muy cutre
@@ -72,43 +69,44 @@ public class LoggerCutre {
 		try {
 			// create a temporary file
 			String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-			this.file = new File(PATH_OF_LOGS + "log_" + timeLog+".txt");
+			this.file = new File(PATH_OF_LOGS + "log_" + timeLog + ".txt");
 
-//			// This will output the full path where the file will be written
-//			// to...
-//			System.out.println(file.getCanonicalPath());
-//
-//			writer = new BufferedWriter(new FileWriter(file));
-//			writer.write("Hello world!");
+			// // This will output the full path where the file will be written
+			// // to...
+			// System.out.println(file.getCanonicalPath());
+			//
+			// writer = new BufferedWriter(new FileWriter(file));
+			// writer.write("Hello world!");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			System.out.println("\n\n\n---------------FICH LOG CREADO EN "+ this.file.getPath() +"----------------\n\n\n");
+		} finally {
+			System.out.println(
+					"\n\n\n---------------FICH LOG CREADO EN " + this.file.getPath() + "----------------\n\n\n");
 
 		}
 	}
 
 	private void writeOnFile(String sentence) {
-		//BufferedWriter writer = null;
+		// BufferedWriter writer = null;
 		FileOutputStream output = null;
 		try {
 			output = new FileOutputStream(file);
 			output.write(sentence.getBytes());
-//			writer = new BufferedWriter(new FileWriter(file));
-//			writer.write(sentence);
+			// writer = new BufferedWriter(new FileWriter(file));
+			// writer.write(sentence);
 		} catch (IOException e) {
 			System.out.println("\n\n\n---------------CASCO AL ESCRIBIR EN EL LOG----------------\n\n\n");
-		}finally{
+		} finally {
 			try {
-				//writer.close();
+				// writer.close();
 				output.close();
 			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
 				System.out.println("\n\n\n---------------CASCO EL CERRAR EL LOG----------------\n\n\n");
 
 			}
-			
+
 		}
 	}
 }
