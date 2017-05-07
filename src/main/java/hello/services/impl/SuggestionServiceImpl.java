@@ -60,7 +60,8 @@ public class SuggestionServiceImpl implements SuggestionService {
 			throw new CitizenException("La sugerencia no existe.");
 		} else {
 			sug.addCiudadanoHaVotado(ciudadano);
-			sug.incrementarVotos();
+			sug.incrementarVotosPositivos();
+			//sug.incrementarVotosTotales();
 			suggestionRepository.save(sug);
 			// guardar en la tabla votos la sugerencia con el usuario
 			logger.send(Topics.POSITIVE_SUGGESTION_VOTE, sug.getId() + "");
@@ -81,7 +82,8 @@ public class SuggestionServiceImpl implements SuggestionService {
 			throw new CitizenException("La sugerencia no existe.");
 		} else {
 			sug.addCiudadanoHaVotado(ciudadano);
-			sug.decrementarVotos();
+			sug.incrementarVotosNegativos();
+			
 			suggestionRepository.save(sug);
 			logger.send(Topics.NEGATIVE_SUGGESTION_VOTE, sug.getId() + "");
 			loggerCutre.log(this.getClass(), "El ciudadano con ID: "
@@ -130,7 +132,7 @@ public class SuggestionServiceImpl implements SuggestionService {
 	private void comprobarConsiguioMinimoVotos(Sugerencia sug) {
 		Configuration config = this.configurationRepository.findAll().get(0);
 		int minVotos = config.getMinimoVotos();
-		if (sug.getVotos() >= minVotos) {
+		if (sug.getVotosPositivos() - sug.getVotosNegativos() >= minVotos) {
 			sug.setConsiguioElMinimo(true);
 		}
 		logger.send(Topics.SUGGESTION_GETS_MIN_VOTES, sug.getNombre());

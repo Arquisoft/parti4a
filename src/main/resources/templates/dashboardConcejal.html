@@ -77,10 +77,11 @@ function drawChart(sugerencias) {
  
      data.addColumn('string','Sugerencias');
      data.addColumn('number','Votos positivos');
+     data.addColumn('number','Votos negativos');
           
      var a=0;
      for(var i in sugerencias){
-     	data.addRows([[sugerencias[a].nombre,sugerencias[a].votosP]]);
+     	data.addRows([[sugerencias[a].nombre,sugerencias[a].votosP,sugerencias[a].votosN]]);
       	a++;
       }
       
@@ -104,7 +105,7 @@ function drawChart(sugerencias) {
 </head>
 <body onload ="connect();">
 <div class="alert alert-info alert-dismissable fade in">
-<strong>Eventos:</strong>
+<strong id="Eventos">Eventos:</strong>
 <br/>
 <div id="comment" >
 </div>

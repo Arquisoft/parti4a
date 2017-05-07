@@ -4,8 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>es.uniovi.asw</groupId>
-	<artifactId>FinalAPPfixed</artifactId>
-	<name>participationSystem0</name>
+	<name>parti4a</name>
 	<version>0.0.1</version>
 
 	<parent>
@@ -220,4 +219,5 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<artifactId>parti4a</artifactId>
 </project>

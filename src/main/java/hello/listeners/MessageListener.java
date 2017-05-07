@@ -52,8 +52,8 @@ public class MessageListener {
 		ss = suggestionService.findAll();// FUNCIONAAAAA
 		lista = new State[ss.size()];
 		for (int i = 0; i < lista.length; i++) {
-			lista[i] = new State(ss.get(i).getNombre(), ss.get(i).getVotos(),
-					ss.get(i).getVotos());
+			lista[i] = new State(ss.get(i).getNombre(), ss.get(i).getVotosPositivos(),
+					ss.get(i).getVotosNegativos());
 		}
 		synchronized (MainController.sseEmitters) {
 			MainController.sseEmitters.forEach((SseEmitter emitter) -> {

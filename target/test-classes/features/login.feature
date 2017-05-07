@@ -6,6 +6,7 @@ Scenario: Iniciar sesion
 	|	name	|	password	|
 	|	pelayo@gmail.com	|		temporal	|
 	|	pedro@gmail.com	|	temporal	|
+	|	concejal@gmail.com	|	temporal	|
 	
 	When introduzo pelayo@gmail.com y la contraseña temporal
 	Then debo iniciar sesion

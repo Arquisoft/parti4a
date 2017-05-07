@@ -33,10 +33,15 @@ public class LogginSteps extends SuperSteps {
 		Map<String, String> pedro = new HashMap<String, String>();
 		pedro.put("usuario", "pedro@gmail.com");
 		pedro.put("pedro", "temporal");
+		
+		Map<String,String> concejal = new HashMap<String,String>();
+		concejal.put("usuario","concejal@gmail.com");
+		concejal.put("pass", "temporal");
 
 		usuarios = new ArrayList<>();
 		usuarios.add(pelayo);
 		usuarios.add(pedro);
+		usuarios.add(concejal);
 
 		// SeleniumUtils.esperaCargaPaginaxpath(driver,
 		// "/html/body/div/div/div[2]/div[1]/h2", 4);

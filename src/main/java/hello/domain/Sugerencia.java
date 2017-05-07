@@ -11,7 +11,8 @@ public class Sugerencia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int votos;
+	private int votosPositivos;
+	private int votosNegativos;
 	private String nombre;
 	private String contenido;
 	@OneToMany(mappedBy = "sugerencia", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -49,7 +50,8 @@ public class Sugerencia {
 		this.contenido = contenido;
 		this.categoria = categoria;
 		this.usuario = usuario;
-		this.votos = 0;
+		this.votosPositivos = 0;
+		this.votosNegativos = 0;
 		this.fechaCreacion = new Date();
 		this.ciudadanosQueVotan = new HashSet<>();
 	}
@@ -61,9 +63,10 @@ public class Sugerencia {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Sugerencia(int votos, String nombre, String contenido, Set<Comentario> comentarios,
+	public Sugerencia(int votosPositivos, int votosNegativos, String nombre, String contenido, Set<Comentario> comentarios,
 			Set<Citizen> ciudadanosQueVotan, Categoria categoria, Citizen usuario, Date fechaCreacion) {
-		this.votos = votos;
+		this.votosPositivos = votosPositivos;
+		this.votosNegativos = votosNegativos;
 		this.nombre = nombre;
 		this.contenido = contenido;
 		this.comentarios = comentarios;
@@ -101,8 +104,8 @@ public class Sugerencia {
 		this.contenido = contenido;
 	}
 
-	public int getVotos() {
-		return votos;
+	public int getVotosPositivos() {
+		return votosPositivos;
 	}
 
 	public Date getFechaCreacion() {
@@ -129,13 +132,17 @@ public class Sugerencia {
 		return categoria;
 	}
 
-	public void incrementarVotos() {
-		this.votos++;
+	public void incrementarVotosPositivos() {
+		this.votosPositivos++;
+	}
+	
+	public void incrementarVotosNegativos() {
+		this.votosNegativos++;
 	}
 
-	public void decrementarVotos() {
-		this.votos--;
-	}
+//	public void decrementarVotos() {
+//		this.votos--;
+//	}
 
 	public void addCiudadanoHaVotado(Citizen ciudadano) {
 		ciudadanosQueVotan.add(ciudadano);
@@ -154,20 +161,32 @@ public class Sugerencia {
 		this.consiguioElMinimo = consiguioElMinimo;
 	}
 
+	public int getVotosNegativos() {
+		return votosNegativos;
+	}
+
+	public void setVotosNegativos(int votosNegativos) {
+		this.votosNegativos = votosNegativos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + ((ciudadanosQueVotan == null) ? 0 : ciudadanosQueVotan.hashCode());
+		result = prime * result + ((comentarios == null) ? 0 : comentarios.hashCode());
 		result = prime * result + (consiguioElMinimo ? 1231 : 1237);
 		result = prime * result + ((contenido == null) ? 0 : contenido.hashCode());
 		result = prime * result + ((fechaCreacion == null) ? 0 : fechaCreacion.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		result = prime * result + votos;
+		result = prime * result + votosNegativos;
+		result = prime * result + votosPositivos;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -182,6 +201,16 @@ public class Sugerencia {
 			if (other.categoria != null)
 				return false;
 		} else if (!categoria.equals(other.categoria))
+			return false;
+		if (ciudadanosQueVotan == null) {
+			if (other.ciudadanosQueVotan != null)
+				return false;
+		} else if (!ciudadanosQueVotan.equals(other.ciudadanosQueVotan))
+			return false;
+		if (comentarios == null) {
+			if (other.comentarios != null)
+				return false;
+		} else if (!comentarios.equals(other.comentarios))
 			return false;
 		if (consiguioElMinimo != other.consiguioElMinimo)
 			return false;
@@ -210,14 +239,20 @@ public class Sugerencia {
 				return false;
 		} else if (!usuario.equals(other.usuario))
 			return false;
-		return (votos == other.votos);
+		if (votosNegativos != other.votosNegativos)
+			return false;
+		if (votosPositivos != other.votosPositivos)
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Sugerencia [id=" + id + ", votos=" + votos + ", nombre=" + nombre + ", contenido=" + contenido
+		return "Sugerencia [id=" + id + ", votos=" + votosPositivos + ", votosNegativos=" + votosNegativos + ", nombre=" + nombre + ", contenido=" + contenido
 				+ ", categoria=" + categoria + ", usuario=" + usuario + ", fechaCreacion=" + fechaCreacion
 				+ ", consiguioElMinimo=" + consiguioElMinimo + "]";
 	}
+
+
 
 }

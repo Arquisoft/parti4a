@@ -31,7 +31,6 @@ import java.util.List;
 @Scope("session")
 public class CitizenController {
 
-	public static List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
 
 	private KafkaProducer kafkaProducer = new KafkaProducer();
 
