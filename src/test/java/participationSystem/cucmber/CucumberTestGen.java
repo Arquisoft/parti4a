@@ -1,4 +1,4 @@
-package participationSystem.cucumber;
+package participationSystem.cucmber;
 
 import org.junit.runner.RunWith;
 

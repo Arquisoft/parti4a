@@ -1,4 +1,4 @@
-package participationSystem.cucumber.steps;
+package participationSystem.cucmber.steps;
 
 import static org.junit.Assert.assertEquals;
 

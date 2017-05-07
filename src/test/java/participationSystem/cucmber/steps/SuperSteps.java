@@ -1,4 +1,4 @@
-package participationSystem.cucumber.steps;
+package participationSystem.cucmber.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;

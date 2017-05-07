@@ -1,4 +1,4 @@
-package participationSystem.cucumber.steps;
+package participationSystem.cucmber.steps;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;

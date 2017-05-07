@@ -1,39 +1,39 @@
-package participationSystem.cucumber.steps;
+package participationSystem.cucmber.steps;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import hello.domain.Categoria;
 import hello.domain.Sugerencia;
-import hello.repository.CategoryRepository;
 import hello.repository.SuggestionRepository;
+import hello.services.CategoryService;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.web.WebAppConfiguration;
 import participationSystem.util.SeleniumUtils;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
 @WebAppConfiguration
+
 public class SuggestionSteps extends SuperSteps {
 
 	private SuggestionRepository sR;
 
 	private Sugerencia currentSuggestion;
-	private CategoryRepository catRep;
+	private CategoryService categoryService;
+
+	@Autowired
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
 
 	@Autowired
 	public void setsR(SuggestionRepository sR) {
 		this.sR = sR;
 	}
 
-	@Autowired
-	public void setCatRep(CategoryRepository catRep) {
-		this.catRep = catRep;
-	}
 
 	@Given("^Inicio sesion en la aplicacion$")
 	public void inicio_sesion_en_la_aplicacion() throws Throwable {
@@ -59,30 +59,28 @@ public class SuggestionSteps extends SuperSteps {
 		// // Write code here that turns the phrase above into concrete actions
 		// throw new PendingException();
 		try {
-			String catName = driver.findElement(By.xpath("//*[@id=\"categoriaSelect\"]")).getText();
-			Categoria currentCat = catRep.findByNombre(catName);
-			this.currentSuggestion = new Sugerencia("Las rotondas molan",
-					"Queremos rotondas en todas las esquinas. Y descuentos en los cambios de neumaticos.", currentCat);
+			driver.findElement(By.xpath("//*[@id=\"myNavbar\"]/ul[1]/li[2]/a")).click();
+
+
+			this.currentSuggestion = new Sugerencia("AAAAAAAAAAAA",
+					"aaaaaaaaaaaaaa", null);
 			driver.findElement(By.xpath("//*[@id=\"titulo-text-input\"]")).sendKeys(currentSuggestion.getNombre());
-			driver.findElement(By.id("//*[@id=\"contenido-text-area\"]")).sendKeys(currentSuggestion.getContenido());
-			driver.findElement(By.id("/html/body/div/div/div[2]/div[2]/form/div[4]/div/button")).click();
+			driver.findElement(By.xpath("//*[@id=\"contenido-text-area\"]")).sendKeys(currentSuggestion.getContenido());
+			driver.findElement(By.xpath("/html/body/div/div/div[2]/div[2]/form/div[4]/div/button")).click();
 
 		} catch (Exception e) {
 			assertEquals(true, false); // Casco
 			return;
+
 		}
 	}
 
-	@Then("^El sistema debe tener mi sugerencia$")
-	public void el_sistema_debe_tener_mi_sugerencia() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		// throw new PendingException();
-		try {
-			List<Sugerencia> mySugs = this.sR.findAll();
-			assertEquals(true, mySugs.contains(this.currentSuggestion));
-		} catch (Exception e) {
-			assertEquals(true, false); // Casco
-			return;
+		@Then("^El sistema debe tener mi sugerencia$")
+		public void el_sistema_debe_tener_mi_sugerencia () throws Throwable {
+			SeleniumUtils.textoPresentePagina(driver,"AAAAAAAAAAAA");
+
+
+
 		}
 	}
-}
+
