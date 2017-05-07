@@ -8,8 +8,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +23,8 @@ import hello.producers.KafkaProducer;
 public class MainController {
 
 	private static final Logger logger = Logger.getLogger(MainController.class);
-	public static List<SseEmitter> sseEmitters = Collections
-			.synchronizedList(new ArrayList<>());
-	public static List<SseEmitter> sseEmitters2 = Collections
-			.synchronizedList(new ArrayList<>());
+	public static List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
+	public static List<SseEmitter> sseEmitters2 = Collections.synchronizedList(new ArrayList<>());
 	@Autowired
 	private KafkaProducer kafkaProducer = new KafkaProducer();
 
@@ -43,8 +39,8 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String sseExamplePage(@RequestParam String username,
-			@RequestParam String password, Map<String, Object> model) {
+	public String sseExamplePage(@RequestParam String username, @RequestParam String password,
+			Map<String, Object> model) {
 		String pagina = "index";
 		if (username.equals("concejal") && password.equals("concejal")) {
 			model.put("state", MessageListener.mensajes);
@@ -110,20 +106,6 @@ public class MainController {
 		return sseEmitter;
 	}
 
-	// @RequestMapping(path = "/", method = RequestMethod.POST)
-	//
-	// public String showMessage(String data) {
-	//
-	// for (SseEmitter sseEmitter : sseEmitters) {
-	// try {
-	// sseEmitter.send(data);
-	// } catch (Exception e) {
-	// logger.error("Se ha cerrado el navegador");
-	// }
-	// }
-	//
-	// return data;
-	// }
 	/**
 	 * Se ejecuta en localhost:8090/ejemplo. Esto actualizara la pagina index
 	 * con los mensajes de la lista

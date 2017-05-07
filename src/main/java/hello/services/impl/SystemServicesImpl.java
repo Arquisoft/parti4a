@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SystemServicesImpl implements SystemServices {
 
-	// private Configuration config = null;
 	private ConfigurationRepository configurationRepository;
 	private CommentRepository commentRepository;
 	private SuggestionRepository suggestionRepository;

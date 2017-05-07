@@ -1,12 +1,8 @@
 package hello.controllers;
 
-import hello.domain.Categoria;
-import hello.domain.Citizen;
-import hello.domain.Configuration;
-import hello.domain.Sugerencia;
-import hello.producers.KafkaProducer;
-import hello.services.*;
-import hello.util.exception.CitizenException;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +12,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import javax.servlet.http.HttpSession;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import hello.domain.Categoria;
+import hello.domain.Citizen;
+import hello.domain.Configuration;
+import hello.domain.Sugerencia;
+import hello.producers.KafkaProducer;
+import hello.services.CategoryService;
+import hello.services.CitizenService;
+import hello.services.CommentService;
+import hello.services.SuggestionService;
+import hello.services.SystemServices;
+import hello.util.exception.CitizenException;
 
 /**
  * Created by pelay on 28/03/2017.
@@ -30,7 +31,6 @@ import java.util.List;
 @Controller
 @Scope("session")
 public class CitizenController {
-
 
 	private KafkaProducer kafkaProducer = new KafkaProducer();
 

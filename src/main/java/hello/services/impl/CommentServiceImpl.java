@@ -30,10 +30,9 @@ public class CommentServiceImpl implements CommentService {
 
 			// addComentario(comentario);
 			this.commentRepository.save(comment);
-			logger.send(Topics.COMMENT_SUGGESTION, comment.getSugerencia()
-					.getId() + separator + comment.getContenido());
-			loggerCutre.log(this.getClass(),
-					"Comentario ID = " + comment.getId());
+			logger.send(Topics.COMMENT_SUGGESTION,
+					comment.getSugerencia().getId() + separator + comment.getContenido());
+			loggerCutre.log(this.getClass(), "Comentario ID = " + comment.getId());
 		} catch (Exception e) {
 			throw new CitizenException("Error al crear un comentario.");
 		}
@@ -41,13 +40,12 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void createComentario(String contenido, Sugerencia sugerencia,
-			Citizen citizen) {
+	public void createComentario(String contenido, Sugerencia sugerencia, Citizen citizen) {
 		Comentario c = new Comentario(contenido, sugerencia, citizen);
 		sugerencia.addComentario(c);
 		commentRepository.save(c);
-		kafkaProducer .send("nuevoComentario", "Se ha añadido el comentario: "
-				+ contenido + " en la sugerencia: " + sugerencia.getNombre());
+		kafkaProducer.send("nuevoComentario",
+				"Se ha añadido el comentario: '" + contenido + "' en la sugerencia: '" + sugerencia.getNombre() + "'");
 	}
 
 }
