@@ -1,0 +1,10 @@
+{
+  "simulation": "parti4aSimulacion",
+  "simulationId": "parti4asimulacion",
+  "start": 1494181630790,
+  "description": "",
+  "scenarios": ["parti4aSimulacion"],
+  "assertions": [
+
+  ]
+}
