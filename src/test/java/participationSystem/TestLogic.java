@@ -6,7 +6,7 @@ import hello.domain.Categoria;
 import hello.domain.Comentario;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
-import hello.producers.SingletonKafkaProducer;
+import hello.KafkaManager.listeners.producers.SingletonKafkaProducer;
 import hello.services.CategoryService;
 import hello.services.CommentService;
 import hello.services.Services;

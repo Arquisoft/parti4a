@@ -23,7 +23,7 @@ INSERT INTO  asw.categoria (id, nombre) VALUES('12','Animales');
 
 
 INSERT INTO asw.sugerencia (id, contenido, nombre, votos_Positivos, votos_Negativos, categoria_id,usuario_id,fecha_creacion,consiguio_el_minimo) VALUES ('1', 'Creación de parada de autobus cubierta en Llamaquique', 'Marquesina Llamaquique', '3','0', '1', '1','2015/05/25',FALSE);
-INSERT INTO asw.sugerencia (id, contenido, nombre, votos_Positivos, votos_Negativos, categoria_id,usuario_id,fecha_creacion,consiguio_el_minimo)VALUES ('2', 'Plantacion de nuevos arboles en el Campo San Francisco', 'Nuevos árboles', '13','0', '2', '1','2014/05/14',FALSE);
+INSERT INTO asw.sugerencia (id, contenido, nombre, votos_Positivos, votos_Negativos, categoria_id,usuario_id,fecha_creacion,consiguio_el_minimo)VALUES ('2', 'Plantacion de nuevos arboles en el Campo San Francisco', 'Nuevos arboles', '13','0', '2', '1','2014/05/14',FALSE);
 INSERT INTO asw.sugerencia (id, contenido, nombre, votos_Positivos, votos_Negativos, categoria_id,usuario_id,fecha_creacion,consiguio_el_minimo)VALUES ('3', 'Implantación de lineas de autobus al nuevo HUCA', 'Lineas de bus Nuevo HUCA', '1','0', '3', '1','2013/05/16',FALSE);
 INSERT INTO asw.sugerencia (id, contenido, nombre, votos_Positivos, votos_Negativos, categoria_id,usuario_id,fecha_creacion,consiguio_el_minimo) VALUES ('4', 'Somos demasiados runners en la ciudad', 'Nuevo estadio de atletismo', '6','0', '4', '1','2017/01/25',FALSE);
 INSERT INTO asw.sugerencia (id, contenido, nombre, votos_Positivos, votos_Negativos, categoria_id,usuario_id,fecha_creacion,consiguio_el_minimo) VALUES ('5', 'La hora de recogida de basuras en invierno es demasiado tarde', 'Ampliacion de horario de recogida', '0','0', '5', '1','2017/05/25',FALSE);

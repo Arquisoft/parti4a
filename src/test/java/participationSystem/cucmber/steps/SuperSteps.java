@@ -1,13 +1,12 @@
 package participationSystem.cucmber.steps;
 
-import org.openqa.selenium.WebDriver;
+import hello.util.loggercutre.LoggerCutre;
+import hello.util.loggercutre.SingletonLoggerCutre;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
-import hello.util.loggercutre.LoggerCutre;
-import hello.util.loggercutre.SingletonLoggerCutre;
 
 @WebAppConfiguration
 public class SuperSteps {
@@ -22,8 +21,8 @@ public class SuperSteps {
 	protected LoggerCutre loggerCutre = SingletonLoggerCutre.getInstance().getLogger();
 	protected boolean stepBien = true;
 	
-	protected WebDriver driver=new HtmlUnitDriver();
-	protected String baseUrl = "http://localhost:8080/";
+	protected static HtmlUnitDriver driver=new HtmlUnitDriver();
+	protected  String baseUrl = "http://localhost:8080/";
 	protected StringBuffer verificationErrors = new StringBuffer();
 	
 	@Autowired

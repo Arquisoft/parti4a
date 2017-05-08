@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import hello.listeners.MessageListener;
+import hello.KafkaManager.listeners.listeners.MessageListener;
 //import hello.listeners.MessageListenerNegative;
-import hello.producers.KafkaProducer;
+import hello.KafkaManager.listeners.producers.KafkaProducer;
 
 @Controller
 public class MainController {
@@ -115,7 +115,7 @@ public class MainController {
 	 */
 	@RequestMapping("/ejemplo")
 	public String ejemplotest(Model model) {
-		model.addAttribute("data", hello.listeners.MessageListener.mensajes);
+		model.addAttribute("data", MessageListener.mensajes);
 		return "index";
 	}
 

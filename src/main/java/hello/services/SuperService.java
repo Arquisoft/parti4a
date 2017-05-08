@@ -1,8 +1,8 @@
 package hello.services;
 
-import hello.producers.KafkaProducer;
-import hello.producers.SingletonKafkaProducer;
-import hello.producers.Topics;
+import hello.KafkaManager.listeners.producers.KafkaProducer;
+import hello.KafkaManager.listeners.producers.SingletonKafkaProducer;
+import hello.KafkaManager.listeners.producers.Topics;
 import hello.util.loggercutre.LoggerCutre;
 import hello.util.loggercutre.SingletonLoggerCutre;
 

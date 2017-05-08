@@ -17,7 +17,7 @@ import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
-import hello.producers.KafkaProducer;
+import hello.KafkaManager.listeners.producers.KafkaProducer;
 import hello.services.CategoryService;
 import hello.services.CitizenService;
 import hello.services.CommentService;

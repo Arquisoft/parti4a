@@ -5,7 +5,6 @@ Feature: Ser capaz de cambiar el numero de votos minimo
 
   Scenario: Cambiar votos minimos
 
-    Given Debe haber una configuracion
-    And he iniciado sesion en la aplicacion como administrador
+    Given Estoy en sesion admin
     When cambio el numero minimo de votos
     Then se debe mostrar el cambio

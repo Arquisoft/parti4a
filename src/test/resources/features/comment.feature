@@ -4,8 +4,7 @@ Feature: Ser capaz de comentar una sugerencia
 		una sugerencia
 		
 Scenario: Comentar sugerencia
-
-	Given Debe haber una sugerencia que comentar
-	And he iniciado sesion en la aplicacion
+	Given Inicio sesion en la aplicacion
+	And Debe haber una sugerencia que comentar
 	When creo un comentario
 	Then la sugerencia debe tener mi comentario

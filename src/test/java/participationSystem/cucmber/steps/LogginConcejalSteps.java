@@ -1,19 +1,21 @@
 package participationSystem.cucmber.steps;
 
-import static org.junit.Assert.assertEquals;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import hello.Application;
+import org.openqa.selenium.By;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.By;
+import static org.junit.Assert.assertEquals;
 
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
+@SpringBootTest(classes = Application.class)
 public class LogginConcejalSteps extends SuperSteps {
 
 	private List<Map<String, String>> usuarios;

@@ -6,8 +6,8 @@ import hello.domain.Sugerencia;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import hello.domain.Comentario;
-import hello.producers.KafkaProducer;
-import hello.producers.Topics;
+import hello.KafkaManager.listeners.producers.KafkaProducer;
+import hello.KafkaManager.listeners.producers.Topics;
 import hello.repository.CommentRepository;
 import hello.services.CommentService;
 import hello.util.exception.CitizenException;
