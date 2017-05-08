@@ -1,22 +1,25 @@
 package participationSystem;
 
+import hello.KafkaManager.producers.SingletonKafkaProducer;
 import hello.Message;
 import hello.controllers.CitizenController;
 import hello.domain.Categoria;
 import hello.domain.Comentario;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
-import hello.KafkaManager.listeners.producers.SingletonKafkaProducer;
 import hello.services.CategoryService;
 import hello.services.CommentService;
 import hello.services.Services;
 import hello.services.SuggestionService;
 import hello.util.exception.CitizenException;
-import static org.junit.Assert.*;
-import java.util.HashSet;
-import java.util.Set;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class TestLogic {
 

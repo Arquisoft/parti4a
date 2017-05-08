@@ -1,28 +1,27 @@
 package hello.services.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import hello.KafkaManager.producers.KafkaProducer;
+import hello.KafkaManager.producers.Topics;
 import hello.domain.Categoria;
 import hello.domain.Citizen;
 import hello.domain.Configuration;
 import hello.domain.Sugerencia;
-import hello.KafkaManager.listeners.producers.KafkaProducer;
-import hello.KafkaManager.listeners.producers.Topics;
 import hello.repository.ConfigurationRepository;
 import hello.repository.SuggestionRepository;
 import hello.services.SuggestionService;
 import hello.util.exception.CitizenException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pelay on 29/03/2017.
  */
 @Service
 public class SuggestionServiceImpl implements SuggestionService {
-	private KafkaProducer kafkaProducer = new KafkaProducer();
+	private hello.KafkaManager.producers.KafkaProducer kafkaProducer = new KafkaProducer();
 	private SuggestionRepository suggestionRepository;
 	private ConfigurationRepository configurationRepository;
 

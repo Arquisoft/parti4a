@@ -1,17 +1,14 @@
 package hello.services.impl;
 
+import hello.KafkaManager.producers.KafkaProducer;
+import hello.KafkaManager.producers.Topics;
 import hello.domain.Citizen;
-import hello.domain.Sugerencia;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import hello.domain.Comentario;
-import hello.KafkaManager.listeners.producers.KafkaProducer;
-import hello.KafkaManager.listeners.producers.Topics;
+import hello.domain.Sugerencia;
 import hello.repository.CommentRepository;
 import hello.services.CommentService;
 import hello.util.exception.CitizenException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

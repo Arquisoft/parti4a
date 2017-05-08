@@ -1,11 +1,7 @@
 package hello.controllers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
+import hello.KafkaManager.listeners.MessageListener;
+import hello.KafkaManager.producers.KafkaProducer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import hello.KafkaManager.listeners.listeners.MessageListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static hello.KafkaManager.listeners.MessageListener.mensajes;
+
+
 //import hello.listeners.MessageListenerNegative;
-import hello.KafkaManager.listeners.producers.KafkaProducer;
+
 
 @Controller
 public class MainController {
@@ -43,11 +47,11 @@ public class MainController {
 			Map<String, Object> model) {
 		String pagina = "index";
 		if (username.equals("concejal") && password.equals("concejal")) {
-			model.put("state", MessageListener.mensajes);
+			model.put("state", mensajes);
 			// model.put("state2", MessageListener.state);
 			pagina = "dashboardConcejal";
 		} else if (username.equals("personal") && password.equals("personal")) {
-			model.put("state", MessageListener.mensajes);
+			model.put("state", mensajes);
 			// model.put("state2", MessageListener.state2);
 			pagina = "dashboardPersonal";
 		}
