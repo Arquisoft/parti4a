@@ -1,22 +1,20 @@
 package participationSystem.cucmber.steps;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import hello.domain.Citizen;
-import hello.domain.Sugerencia;
 import hello.repository.CitizenRepository;
 import hello.repository.CommentRepository;
 import hello.repository.SuggestionRepository;
+import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import participationSystem.util.SeleniumUtils;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 @Service
 public class VoteSuggestionSteps extends SuperSteps {
@@ -51,13 +49,6 @@ public class VoteSuggestionSteps extends SuperSteps {
 		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
 		driver.findElement(By.name("botonlogin")).click();
-		try {
-			userLogged = citizenRepository.findByEmail("pelayo@gmail.com");
-
-		} catch (Exception e) {
-			assertEquals(true, false);
-		}
-
 		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
 	}
 
@@ -69,20 +60,10 @@ public class VoteSuggestionSteps extends SuperSteps {
 				"Plantacion de nuevos arboles en el Campo San Francisco");
 		this.idSugerencia = Long
 				.parseLong(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText());
-		assertEquals(idSugerencia, "13");
+		assertEquals(idSugerencia.toString(), "13");
 	}
 
-	@Given("^No he votado ya esa sugerencia$")
-	public void no_he_votado_ya_esa_sugerencia() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		// throw new PendingException();
-		Sugerencia sugActual = suggestionRepository.findOne(idSugerencia);
-		if (userLogged != null) {
-			assertEquals(true, !userLogged.getSugerenciasQueVota().contains(sugActual));
-		} else {
-			assertEquals(true, false);
-		}
-	}
+
 
 	@When("^Voto positiva o negativamente$")
 	public void voto_positiva_o_negativamente() throws Throwable {
@@ -106,20 +87,7 @@ public class VoteSuggestionSteps extends SuperSteps {
 		assertEquals(driver.findElement(By.xpath("//*[@id=\"sugerencias\"]/tbody/tr[2]/td[3]")).getText(), "14");
 	}
 
-	@Then("^no puedo volver a votar$")
-	public void no_puedo_volver_a_votar() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		// throw new PendingException();
-		try {
-			Sugerencia sugActual = suggestionRepository.findOne(idSugerencia);
-			if (userLogged != null) {
-				assertEquals(true, userLogged.getSugerenciasQueVota().contains(sugActual));
-			} else {
-				assertEquals(true, false);
-			}
-		} catch (Exception e) {
-			assertEquals(true, false);
-		}
 
-	}
+
+
 }
