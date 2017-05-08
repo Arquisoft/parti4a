@@ -134,8 +134,9 @@ public class SuggestionServiceImpl implements SuggestionService {
 		int minVotos = config.getMinimoVotos();
 		if (sug.getVotosPositivos() - sug.getVotosNegativos() >= minVotos) {
 			sug.setConsiguioElMinimo(true);
+			logger.send(Topics.SUGGESTION_GETS_MIN_VOTES, sug.getNombre());
 		}
-		logger.send(Topics.SUGGESTION_GETS_MIN_VOTES, sug.getNombre());
+		
 	}
 
 	@Override

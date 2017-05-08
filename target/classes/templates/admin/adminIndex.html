@@ -53,7 +53,8 @@
                 <tr>
                     <th>Título</th>
                     <th>Contenido</th>
-                    <th>Votos</th>
+                    <th>Votos +</th>
+                    <th>Votos -</th>
                     <th>Fecha Creación</th>
                     <th>Edición</th>
 
@@ -63,7 +64,8 @@
                 <tr th:each="sugerencia : ${session.listaSugerencias}">
                     <td> <a th:text="${sugerencia.nombre}" th:href="@{/sug(idSug=${sugerencia.getId()})}">Titulo</a></td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
-                    <td th:text="${sugerencia.votos}">Votos</td>
+                    <td th:text="${sugerencia.votosPositivos}">Votos +</td>
+                    <td th:text="${sugerencia.votosNegativos}">Votos -</td>
                     <td th:text="${#dates.format(sugerencia.fechaCreacion, 'dd-MM-yyyy')}"></td>
                     <td>
                         <form action="#" th:action="@{/goToEdit}"  method="post">
