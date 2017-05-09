@@ -50,7 +50,7 @@ public class VoteSuggestionSteps extends SuperSteps {
 		driver.findElement(By.xpath("//*[@id=\"inputEmail\"]")).sendKeys("pelayo@gmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("temporal");
 		driver.findElement(By.name("botonlogin")).click();
-		SeleniumUtils.esperaCargaPaginaxpath(driver, "/html/body/div/div/div[2]/div[1]/h2", 4);
+
 	}
 
 	@Given("^Existe al menos una sugerencia para votar$")

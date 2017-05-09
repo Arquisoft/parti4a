@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">participationSystem4a - ADMIN </a>
+            <a class="navbar-brand" href="#">participationSystem4a</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -62,7 +62,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="sugerencia : ${session.listaSugerencias}">
-                    <td th:text="${sugerencia.nombre}">Titulo</td>
+                    <td> <a th:text="${sugerencia.nombre}" th:href="@{/sug(idSug=${sugerencia.getId()})}">Titulo</a></td>
                     <td th:text="${sugerencia.contenido}">Contenido</td>
                     <td th:text="${sugerencia.votosPositivos}">Votos +</td>
                     <td th:text="${sugerencia.votosNegativos}">Votos -</td>
