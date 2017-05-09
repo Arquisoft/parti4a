@@ -9,9 +9,9 @@
 
 
 ### Usuarios
-Ciudadano normal --> pelayo@gmail.com password: temporal
-Político --> concejal@gmail.com password: temporal
-Administrador --> admin@gmail.com password: temporal
+- Ciudadano normal --> pelayo@gmail.com password: temporal
+- Político --> concejal@gmail.com password: temporal
+- Administrador --> admin@gmail.com password: temporal
 
 
 # Authors
