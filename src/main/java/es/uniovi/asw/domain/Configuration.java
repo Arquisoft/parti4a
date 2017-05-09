@@ -2,7 +2,7 @@ package es.uniovi.asw.domain;
 
 import javax.persistence.*;
 
-import es.uniovi.asw.util.loggercutre.SingletonLoggerCutre;
+import es.uniovi.asw.util.loggerAdmin.SingletonLoggerAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class Configuration {
 		if (!"".equals(word)) {
 			//rellenarListaPalabrasNoPermitidas();
 //			this.palabrasNoPermitidas.add(word);
-			SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
+			SingletonLoggerAdmin.getInstance().getLogger().log(getClass(),
 					"Antes de actualizar " + PALABRAS_NO_PERMITIDAS);
 //			actualizarCadenaDePalabras();
 			StringBuilder sb = new StringBuilder();
@@ -60,7 +60,7 @@ public class Configuration {
 			sb.append(separador + word);
 			this.PALABRAS_NO_PERMITIDAS =  sb.toString();
 
-			SingletonLoggerCutre.getInstance().getLogger().log(getClass(),
+			SingletonLoggerAdmin.getInstance().getLogger().log(getClass(),
 					"Tras actualizar " + this.PALABRAS_NO_PERMITIDAS);
 		}
 	}

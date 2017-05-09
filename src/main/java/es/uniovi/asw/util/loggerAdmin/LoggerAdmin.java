@@ -1,4 +1,4 @@
-package es.uniovi.asw.util.loggercutre;
+package es.uniovi.asw.util.loggerAdmin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,12 +13,12 @@ import java.util.Calendar;
  * @author uo240327
  *
  */
-public class LoggerCutre {
+public class LoggerAdmin {
 
 	private File file;
 	public final static String PATH_OF_LOGS = "src/test/resources/logs/";
 
-	public LoggerCutre() {
+	public LoggerAdmin() {
 		createLogFile();
 	}
 

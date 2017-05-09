@@ -6,8 +6,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import es.uniovi.asw.util.loggercutre.LoggerCutre;
-import es.uniovi.asw.util.loggercutre.SingletonLoggerCutre;
+import es.uniovi.asw.util.loggerAdmin.LoggerAdmin;
+import es.uniovi.asw.util.loggerAdmin.SingletonLoggerAdmin;
 
 @WebAppConfiguration
 public class SuperSteps {
@@ -19,7 +19,7 @@ public class SuperSteps {
 //	public SuggestionService suggestionService = Services.getSuggestionService();
 	
 	protected ConfigurableApplicationContext appContext;
-	protected LoggerCutre loggerCutre = SingletonLoggerCutre.getInstance().getLogger();
+	protected LoggerAdmin loggerCutre = SingletonLoggerAdmin.getInstance().getLogger();
 	protected boolean stepBien = true;
 	
 	protected static HtmlUnitDriver driver=new HtmlUnitDriver();
