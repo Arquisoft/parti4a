@@ -7,7 +7,12 @@
 
 [![Join the chat at https://gitter.im/Arquisoft/participationSystem4a](https://badges.gitter.im/Arquisoft/participationSystem4a.svg)](https://gitter.im/Arquisoft/participants0?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Skeleton of participants module
+
+### Usuarios
+Ciudadano normal --> pelayo@gmail.com password: temporal
+Político --> concejal@gmail.com password: temporal
+Administrador --> admin@gmail.com password: temporal
+
 
 # Authors
 
