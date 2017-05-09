@@ -48,7 +48,7 @@ public class AdminController {
         Sugerencia sug = suggestionService.findById(id);
         model.addAttribute("suggestion",sug);
 
-        return "/admin/editSuggestion";
+        return "admin/editSuggestion";
     }
 
 
@@ -64,7 +64,7 @@ public class AdminController {
 
         List<Sugerencia> listaSugerencias =suggestionService.findSugerenciaWithMinVotes();
         session.setAttribute("listaSugerencias", listaSugerencias);
-        return "/admin/adminIndex";
+        return "admin/adminIndex";
     }
 
     @RequestMapping(value = "/goToAddWord")
@@ -73,13 +73,13 @@ public class AdminController {
         List<String>listaPalabras = conf.getPalabrasNoPermitidas();
         model.addAttribute("palabras",listaPalabras);
         model.addAttribute("votes", conf.getMinimoVotos());
-        return "/admin/addWord";
+        return "admin/addWord";
     }
 
     @RequestMapping(value = "/addWord")
     public String chargeWords(@RequestParam String word){
         adminService.addPalabraProhibida(word);
-        return "/admin/addWord";
+        return "admin/addWord";
     }
 
     @RequestMapping(value = "/changeVotes")
@@ -87,7 +87,7 @@ public class AdminController {
         adminService.setMinimoVotos(Integer.parseInt(votes));
         Configuration conf =  systemService.getConfiguration();
         model.addAttribute("votes", conf.getMinimoVotos());
-        return "/admin/addWord";
+        return "admin/addWord";
     }
 
 

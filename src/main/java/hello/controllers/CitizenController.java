@@ -83,7 +83,7 @@ public class CitizenController {
 				session.setAttribute("listaSugerencias", listaSugerencias);
 				session.setAttribute("listaCategorias", categoryService.findAll());
 
-				return "/user/index";
+				return "user/index";
 
 			}
 
@@ -93,7 +93,7 @@ public class CitizenController {
 				List<Sugerencia> listaSugerencias = suggestionService.findSugerenciaWithMinVotes();
 				session.setAttribute("listaSugerencias", listaSugerencias);
 
-				return "/admin/adminIndex";
+				return "admin/adminIndex";
 			}
 		}
 		model.addAttribute("error", "Your username and password is invalid.");
@@ -106,7 +106,7 @@ public class CitizenController {
 		this.idCat = idCat;
 		putSugerenciasInSession(session);
 
-		return "/user/index";
+		return "user/index";
 	}
 
 	private void putSugerenciasInSession(HttpSession session) {
@@ -139,7 +139,7 @@ public class CitizenController {
 		}
 		putSugerenciasInSession(session);
 
-		return "/user/index";
+		return "user/index";
 	}
 
 	@RequestMapping(value = "/vote-", method = RequestMethod.POST)
@@ -155,7 +155,7 @@ public class CitizenController {
 		}
 		putSugerenciasInSession(session);
 
-		return "/user/index";
+		return "user/index";
 	}
 
 	@RequestMapping(value = "/sug")
@@ -163,7 +163,7 @@ public class CitizenController {
 		Long id = Long.parseLong(idSug);
 		Sugerencia sugerencia = suggestionService.findById(id);
 		model.addAttribute("sugerencia", sugerencia);
-		return "/user/viewSuggestion";
+		return "user/viewSuggestion";
 
 	}
 
@@ -175,13 +175,13 @@ public class CitizenController {
 		commentService.createComentario(comentario, sugerencia, citizen);
 		sugerencia = suggestionService.findById(id);
 		model.addAttribute("sugerencia", sugerencia);
-		return "/user/viewSuggestion";
+		return "user/viewSuggestion";
 	}
 
 	@RequestMapping(value = "/createSuggestion")
 	public String addComment(Model model) {
 		model.addAttribute("listaCategorias", categoryService.findAll());
-		return "/user/createSuggestion";
+		return "user/createSuggestion";
 	}
 
 	@RequestMapping(value = "/submitSuggestion")
@@ -193,7 +193,7 @@ public class CitizenController {
 		if (systemService.contienePalabrasNoAdmitidas(tituloSugerencia)
 				|| systemService.contienePalabrasNoAdmitidas(contSugerencia)) {
 			model.addAttribute("errorMessage", "Contiene palabras no admitidas");
-			return "/user/createSuggestion";
+			return "user/createSuggestion";
 		}
 
 		try {
@@ -205,7 +205,7 @@ public class CitizenController {
 		List<Sugerencia> listaSugerencias = getSugerencias(null);
 		session.setAttribute("listaSugerencias", listaSugerencias);
 		kafkaProducer.send("update", "actualizando");
-		return "/user/index";
+		return "user/index";
 	}
 
 	private List<Sugerencia> getSugerencias(Categoria c) {
@@ -220,7 +220,7 @@ public class CitizenController {
 	@RequestMapping(value = "/logOut")
 	public String logOut(HttpSession session) {
 		session.setAttribute("citizen", null);
-		return "/index";
+		return "index";
 
 	}
 
