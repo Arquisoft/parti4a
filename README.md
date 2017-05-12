@@ -24,4 +24,6 @@
 - Pelayo García Lartategui (@pelayolartategui)
 - Alan Padierna Fernández (@AlanPadi95)
 - Daniel Iglesias Suárez (@suissedani)
+- Daniel González García (@danigg)
+- Daniel Jesús López Toimil (@danieltoimil)
 
